@@ -32,7 +32,7 @@ public class HomeController implements ActionListener, TreeSelectionListener {
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == home.getitemAbout()) {
       try {
-        Desktop.getDesktop().browse(new URI("https://github.com/Bug9Best/primary-care-hospital-applicaction"));
+        Desktop.getDesktop().browse(new URI("https://github.com/Bug9Best/primary-care-hospital"));
       } catch (IOException ex) {
         System.out.println("Error: " + ex.getMessage());
       } catch (URISyntaxException ex) {
