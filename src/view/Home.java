@@ -3,18 +3,21 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.MatteBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Home {
   // Define Objects
   private JFrame frame;
   private JPanel sideBar, contentPanel, pagePanel;
+  private JPanel panelName, panelRoll, panelSignOut;
   private JTree manageTree;
   private DefaultMutableTreeNode manageMenu, list, drug, supply, setting;
   private JMenuBar menuBar;
   private JMenu file;
   private JMenuItem itemAbout, itemExit;
-  private JLabel labelPage = new JLabel("Home");
+  private JLabel labelName, labelRoll;
+  private JButton bottonSignOut;
 
   public Home() {
     // Create Objects
@@ -22,6 +25,12 @@ public class Home {
     sideBar = new JPanel();
     contentPanel = new JPanel();
     pagePanel = new JPanel();
+    panelName = new JPanel();
+    panelRoll = new JPanel();
+    panelSignOut = new JPanel();
+    labelName = new JLabel("Natthaphon Ditthaviboon");
+    labelRoll = new JLabel("Technical Nurse");
+    bottonSignOut = new JButton("Sign Out");
     menuBar = new JMenuBar();
     file = new JMenu("File");
     itemAbout = new JMenuItem("About this Program");
@@ -47,10 +56,26 @@ public class Home {
     frame.add(sideBar, BorderLayout.WEST);
     sideBar.setLayout(new BorderLayout(5, 0));
     sideBar.setLayout(new BorderLayout());
+    pagePanel.setBackground(Color.WHITE);
+    pagePanel.setLayout(new GridLayout(3, 1));
+    pagePanel.setBorder(new TitledBorder(""));
+    panelName.setLayout(new FlowLayout(FlowLayout.LEFT));
+    panelName.setBackground(Color.WHITE);
+    panelRoll.setLayout(new FlowLayout(FlowLayout.LEFT));
+    panelRoll.setBackground(Color.WHITE);
+    panelSignOut.setLayout(new GridLayout(1, 1));
+    panelSignOut.setBackground(Color.WHITE);
 
-    labelPage.setFont(new Font("Arial", Font.BOLD, 24));
-    pagePanel.setBackground(Color.gray);
-    pagePanel.add(labelPage);
+    labelName.setFont(new Font("Arial", Font.BOLD, 16));
+    labelRoll.setFont(new Font("Arial", Font.PLAIN, 14));
+
+    panelName.add(labelName);
+    panelRoll.add(labelRoll);
+    panelSignOut.add(bottonSignOut);
+
+    pagePanel.add(panelName);
+    pagePanel.add(panelRoll);
+    pagePanel.add(panelSignOut);
 
     // Tree
     manageMenu = new DefaultMutableTreeNode("Management");
@@ -123,13 +148,5 @@ public class Home {
 
   public DefaultMutableTreeNode getSetting() {
     return setting;
-  }
-
-  public JLabel getLabelPage() {
-    return labelPage;
-  }
-
-  public void setLabelPage(JLabel labelPage) {
-    this.labelPage = labelPage;
   }
 }
