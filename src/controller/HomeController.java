@@ -27,6 +27,10 @@ public class HomeController implements ActionListener, TreeSelectionListener, Li
     home.getItemExit().addActionListener(this);
     home.getManageTree().addTreeSelectionListener(this);
 
+    lists.getBtnAdd().addActionListener(this);
+    lists.getBtnDelete().addActionListener(this);
+    lists.getListTable().getSelectionModel().addListSelectionListener(this);
+
     drugs.getBtnAdd().addActionListener(this);
     drugs.getBtnDelete().addActionListener(this);
     drugs.getDrugTable().getSelectionModel().addListSelectionListener(this);
@@ -47,6 +51,10 @@ public class HomeController implements ActionListener, TreeSelectionListener, Li
       }
     } else if (e.getSource() == home.getItemExit()) {
       System.exit(0);
+    } else if (e.getSource() == lists.getBtnAdd()) {
+      System.out.println("Add button clicked");
+    } else if (e.getSource() == lists.getBtnDelete()) {
+      System.out.println("Delete button clicked");
     } else if (e.getSource() == drugs.getBtnAdd()) {
       System.out.println("Add button clicked");
     } else if (e.getSource() == drugs.getBtnDelete()) {
@@ -88,7 +96,10 @@ public class HomeController implements ActionListener, TreeSelectionListener, Li
     String Data = null;
     int[] row = drugs.getDrugTable().getSelectedRows();
     int[] columns = drugs.getDrugTable().getSelectedColumns();
-    if (e.getSource() == drugs.getDrugTable().getSelectionModel()) {
+    
+    if (e.getSource() == lists.getListTable().getSelectionModel()) {
+      System.out.println("List table selected");
+    } else if (e.getSource() == drugs.getDrugTable().getSelectionModel()) {
       for (int i = 0; i < row.length; i++) {
         for (int j = 0; j < columns.length; j++) {
           Data = (String) drugs.getDrugTable().getValueAt(row[i], columns[j]);
