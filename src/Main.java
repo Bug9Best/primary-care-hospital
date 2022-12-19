@@ -2,6 +2,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import controller.HomeController;
+import controller.SignInController;
 
 public class Main {
   public static void main(String[] args) {
@@ -9,7 +10,7 @@ public class Main {
       for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
         if ("Nimbus".equals(info.getName())) {
           UIManager.setLookAndFeel(info.getClassName());
-          new HomeController();
+          new SignInController();
         }
       }
     } catch (Exception e) {

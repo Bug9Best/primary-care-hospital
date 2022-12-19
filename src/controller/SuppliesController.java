@@ -12,11 +12,14 @@ public class SuppliesController implements ActionListener, ListSelectionListener
   }
 
   public void actionPerformed(ActionEvent e) {
-    System.out.println("SuppliesController");
+    if (e.getActionCommand() == "Add") {
+      System.out.println("Add Supply");
+    } else if (e.getActionCommand() == "Delete") {
+      System.out.println("Delete Supply");
+    }
   }
 
   public void valueChanged(ListSelectionEvent e) {
-
+    System.out.println("Selected Supply");
   }
-
 }

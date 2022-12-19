@@ -13,11 +13,14 @@ public class DrugsController implements ActionListener, ListSelectionListener {
   }
 
   public void actionPerformed(ActionEvent e) {
-    System.out.println("SuppliesController");
+    if (e.getActionCommand() == "Add") {
+      System.out.println("Add Drug");
+    } else if (e.getActionCommand() == "Delete") {
+      System.out.println("Delete Drug");
+    }
   }
 
   public void valueChanged(ListSelectionEvent e) {
-
+    System.out.println("Selected Drug");
   }
-
 }

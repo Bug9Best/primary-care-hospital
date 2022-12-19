@@ -4,66 +4,86 @@ import javax.swing.*;
 import java.awt.*;
 
 public class SignIn {
-    // Main Frame
-    JFrame fr = new JFrame();
+  // Declare Attributes
+  private JFrame frame;
+  private JPanel panelMain, panelImg, panelForm, form, panelText, panelButton;
+  private JLabel img, labelUsername, labelPassword;
+  private JTextField textFieldUsername;
+  private JPasswordField texFieldPassword;
+  private JButton buttonLogin, buttonRegister;
 
-    // Panel
-    JPanel MainPanel = new JPanel();
-    JPanel IconPanel = new JPanel();
-    JPanel FormPanel = new JPanel();
+  public SignIn() {
+    // Create Objects
+    frame = new JFrame("Primary Care Hospital Management System");
+    panelMain = new JPanel();
+    panelImg = new JPanel();
+    panelForm = new JPanel();
+    form = new JPanel();
+    panelText = new JPanel();
+    panelButton = new JPanel();
+    img = new JLabel();
+    labelUsername = new JLabel("Username");
+    labelPassword = new JLabel("Password");
+    textFieldUsername = new JTextField(40);
+    texFieldPassword = new JPasswordField(40);
+    buttonLogin = new JButton("Login");
+    buttonRegister = new JButton("Register");
 
-    GridLayout gridLayout = new GridLayout(4, 2);
-    JPanel Form = new JPanel(gridLayout);
-    // JLabel
-    JLabel Icon = new JLabel();
-    JLabel LabelLogin = new JLabel("Login");
-    JLabel LabelUsername = new JLabel("Username");
-    JLabel LabelPassword = new JLabel("Password");
+    // Set Layout
+    form.setLayout(new GridLayout(2, 1, 0, 20));
+    panelText.setLayout(new GridLayout(4, 1));
+    panelMain.setLayout(new BorderLayout());
 
-    //Text Field
-    JTextField TFUsername = new JTextField();
-    JPasswordField TFPassword = new JPasswordField();
+    // Set Style
+    buttonLogin.setPreferredSize(new Dimension(200, 35));
+    buttonRegister.setPreferredSize(new Dimension(200, 35));
+    img.setIcon(new ImageIcon("src/assets/asd.png"));
+    panelImg.setSize(720, 720);
+    panelImg.setPreferredSize(new Dimension(720, 720));
+    form.setBorder(BorderFactory.createEmptyBorder(220, 50, 220, 50));
+    form.setBackground(Color.WHITE);
+    panelText.setBackground(Color.WHITE);
+    panelButton.setBackground(Color.WHITE);
+    panelImg.setBackground(Color.WHITE);
+    panelForm.setBackground(Color.WHITE);
+    panelMain.setBackground(Color.WHITE);
 
-    //Button
-    JButton BtLogin = new JButton("Login");
-    JButton BtRegis = new JButton("Register");
+    // Add Components
+    panelText.add(labelUsername);
+    panelText.add(textFieldUsername);
+    panelText.add(labelPassword);
+    panelText.add(texFieldPassword);
+    panelButton.add(buttonLogin);
+    panelButton.add(buttonRegister);
+    form.add(panelText);
+    form.add(panelButton);
+    panelForm.add(form);
+    panelImg.add(img);
+    panelMain.add(panelImg, BorderLayout.WEST);
+    panelMain.add(panelForm);
+    frame.add(panelMain);
 
-    public SignIn(){
-        gridLayout.setVgap(10);
-        Icon.setIcon(new ImageIcon("C:/Users/Gun/work/OOP/Login/src/33777-smll.png"));
-        IconPanel.add(Icon);
-        IconPanel.setBorder(BorderFactory.createEmptyBorder(175,0,0,0));
-        IconPanel.setSize(640, 720);
-        IconPanel.setPreferredSize(new Dimension(640, 720));
+    // Frame Configurations
+    frame.setResizable(false);
+    frame.setSize(1280, 720);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    frame.setVisible(true);
+  }
 
-        FormPanel.setBackground(Color.GRAY);
-        Form.setBackground(Color.CYAN);
-        Form.add(LabelLogin);
-        Form.add(new Label());
-        Form.add(LabelUsername);
-        Form.add(TFUsername);
-        Form.add(LabelPassword);
-        Form.add(TFPassword);
-        Form.add(BtLogin);
-        Form.add(BtRegis);
-        //Form.setBorder(BorderFactory.createEmptyBorder(100,0,100,0));
+  public JFrame getFrame() {
+    return frame;
+  }
 
-        FormPanel.setLayout(new BoxLayout(FormPanel, BoxLayout.Y_AXIS));
-        FormPanel.setSize(640, 520);
-        FormPanel.setPreferredSize(new Dimension(640, 520));
-        FormPanel.setBorder(BorderFactory.createEmptyBorder(300,100,300,100));
-        FormPanel.add(Form);
+  public JPanel getPanelMain() {
+    return panelMain;
+  }
 
-        MainPanel.setLayout(new BoxLayout(MainPanel, BoxLayout.X_AXIS));
-        MainPanel.setSize(640,520);
-        MainPanel.setPreferredSize(new Dimension(640,520));
-        MainPanel.add(IconPanel);
-        MainPanel.add(FormPanel);
+  public JButton getButtonLogin() {
+    return buttonLogin;
+  }
 
-        fr.add(MainPanel);
-        fr.setBackground(Color.BLUE);
-        fr.setSize(1280, 720);
-        fr.setVisible(true);
-        fr.setDefaultCloseOperation(fr.EXIT_ON_CLOSE);
-    }
+  public JButton getButtonRegister() {
+    return buttonRegister;
+  }
+
 }

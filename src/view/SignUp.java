@@ -3,9 +3,8 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class SignUp {
+public class SignUp extends JPanel {
     // Main Frame
-    JFrame fr = new JFrame();
 
     // Panel
     JPanel MainPanel = new JPanel();
@@ -27,8 +26,7 @@ public class SignUp {
     JTextField TFFullname = new JTextField();
     // Button
     JButton BtRegis = new JButton("Register");
-    String[] role = { "Select Role", "Doctor", "Registered Nurse","Technical Nurse", "Nursing Assistant" }; // add role this
-
+    String[] role = { "Select Role", "Doctor", "Registered Nurse", "Technical Nurse", "Nursing Assistant" };
     JComboBox AllRole = new JComboBox(role);
 
     public SignUp() {
@@ -65,15 +63,6 @@ public class SignUp {
         MainPanel.setPreferredSize(new Dimension(640, 520));
         MainPanel.add(IconPanel);
         MainPanel.add(FormPanel);
-
-        fr.add(MainPanel);
-        fr.setBackground(Color.BLUE);
-        fr.setSize(1280, 720);
-        fr.setVisible(true);
-        fr.setDefaultCloseOperation(fr.EXIT_ON_CLOSE);
-    }
-
-    public static void main(String[] args) {
-        new SignUp();
+        this.add(MainPanel);
     }
 }
