@@ -1,7 +1,5 @@
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
-
-import controller.HomeController;
 import controller.SignInController;
 
 public class Main {
