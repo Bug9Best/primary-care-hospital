@@ -37,7 +37,7 @@ public class SignIn {
     // Set Style
     buttonLogin.setPreferredSize(new Dimension(200, 35));
     buttonRegister.setPreferredSize(new Dimension(200, 35));
-    img.setIcon(new ImageIcon("src/assets/asd.png"));
+    img.setIcon(new ImageIcon("src/assets/login.png"));
     panelImg.setSize(720, 720);
     panelImg.setPreferredSize(new Dimension(720, 720));
     form.setBorder(BorderFactory.createEmptyBorder(220, 50, 220, 50));

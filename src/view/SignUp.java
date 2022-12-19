@@ -1,68 +1,79 @@
 package view;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class SignUp extends JPanel {
-    // Main Frame
-
-    // Panel
-    JPanel MainPanel = new JPanel();
-    JPanel IconPanel = new JPanel();
-    JPanel FormPanel = new JPanel();
-
-    GridLayout gridLayout = new GridLayout(6, 2);
-    JPanel Form = new JPanel(gridLayout);
-    // JLabel
-    JLabel Icon = new JLabel();
-    JLabel LabelRegis = new JLabel("Register");
-    JLabel LabelUsername = new JLabel("Username");
-    JLabel LabelPassword = new JLabel("Password");
-    JLabel LabelFullname = new JLabel("Fullname");
-    JLabel LabelRole = new JLabel("Role");
-    // Text Field
-    JTextField TFUsername = new JTextField();
-    JPasswordField TFPassword = new JPasswordField();
-    JTextField TFFullname = new JTextField();
-    // Button
-    JButton BtRegis = new JButton("Register");
-    String[] role = { "Select Role", "Doctor", "Registered Nurse", "Technical Nurse", "Nursing Assistant" };
-    JComboBox AllRole = new JComboBox(role);
+    // Declare Attributes
+    private JPanel panelImg, panelForm, form, panelText, panelButton;
+    private JLabel img, labelName, labelRoll, labelUsername, labelPassword;
+    private JTextField textFieldName, textFieldRoll, textFieldUsername;
+    private JPasswordField textFieldPassword;
+    private JButton buttonSignUp, buttonCancel;
 
     public SignUp() {
-        gridLayout.setVgap(10);
-        Icon.setIcon(new ImageIcon("C:/Users/Gun/work/OOP/Login/src/33777-smll.png"));
-        IconPanel.add(Icon);
-        IconPanel.setBorder(BorderFactory.createEmptyBorder(175, 0, 0, 0));
-        IconPanel.setSize(640, 720);
-        IconPanel.setPreferredSize(new Dimension(640, 720));
+        // Create Objects
+        panelImg = new JPanel();
+        panelForm = new JPanel();
+        form = new JPanel();
+        panelText = new JPanel();
+        panelButton = new JPanel();
+        img = new JLabel();
+        labelName = new JLabel("Name");
+        labelRoll = new JLabel("Roll");
+        labelUsername = new JLabel("Username");
+        labelPassword = new JLabel("Password");
+        textFieldName = new JTextField(40);
+        textFieldRoll = new JTextField(40);
+        textFieldUsername = new JTextField(40);
+        textFieldPassword = new JPasswordField(40);
+        buttonSignUp = new JButton("Confirm");
+        buttonCancel = new JButton("Cancel");
 
-        FormPanel.setBackground(Color.GRAY);
-        Form.setBackground(Color.CYAN);
-        Form.add(LabelRegis);
-        Form.add(new Label());
-        Form.add(LabelFullname);
-        Form.add(TFFullname);
-        Form.add(LabelRole);
-        Form.add(AllRole);
-        Form.add(LabelUsername);
-        Form.add(TFUsername);
-        Form.add(LabelPassword);
-        Form.add(TFPassword);
-        Form.add(BtRegis);
-        // Form.setBorder(BorderFactory.createEmptyBorder(100,0,100,0));
+        // Set Layout
+        form.setLayout(new GridLayout(2, 1, 0, 20));
+        panelText.setLayout(new GridLayout(8, 1));
+        this.setLayout(new BorderLayout());
 
-        FormPanel.setLayout(new BoxLayout(FormPanel, BoxLayout.Y_AXIS));
-        FormPanel.setSize(640, 520);
-        FormPanel.setPreferredSize(new Dimension(640, 520));
-        FormPanel.setBorder(BorderFactory.createEmptyBorder(300, 100, 300, 100));
-        FormPanel.add(Form);
+        // Set Style
+        buttonSignUp.setPreferredSize(new Dimension(200, 35));
+        buttonCancel.setPreferredSize(new Dimension(200, 35));
+        img.setIcon(new ImageIcon("src/assets/register.png"));
+        panelImg.setSize(720, 720);
+        panelImg.setPreferredSize(new Dimension(720, 720));
+        form.setBorder(BorderFactory.createEmptyBorder(220, 50, 220, 50));
+        form.setBackground(Color.WHITE);
+        panelText.setBackground(Color.WHITE);
+        panelButton.setBackground(Color.WHITE);
+        panelImg.setBackground(Color.WHITE);
+        panelForm.setBackground(Color.WHITE);
+        this.setBackground(Color.WHITE);
 
-        MainPanel.setLayout(new BoxLayout(MainPanel, BoxLayout.X_AXIS));
-        MainPanel.setSize(640, 520);
-        MainPanel.setPreferredSize(new Dimension(640, 520));
-        MainPanel.add(IconPanel);
-        MainPanel.add(FormPanel);
-        this.add(MainPanel);
+        // Add Components
+        panelText.add(labelName);
+        panelText.add(textFieldName);
+        panelText.add(labelRoll);
+        panelText.add(textFieldRoll);
+        panelText.add(labelUsername);
+        panelText.add(textFieldUsername);
+        panelText.add(labelPassword);
+        panelText.add(textFieldPassword);
+        panelButton.add(buttonCancel);
+        panelButton.add(buttonSignUp);
+        form.add(panelText);
+        form.add(panelButton);
+        panelForm.add(form);
+        panelImg.add(img);
+        this.add(panelImg, BorderLayout.EAST);
+        this.add(panelForm);
     }
+
+    public JButton getButtonSignUp() {
+        return buttonSignUp;
+    }
+
+    public JButton getButtonCancel() {
+        return buttonCancel;
+    }
+
 }
