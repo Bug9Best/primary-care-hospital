@@ -9,7 +9,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Home {
   // Define Objects
   private JFrame frame;
-  private JPanel mainPanel, sideBar, contentPanel, pagePanel;
+  private JPanel  sideBar, contentPanel, pagePanel;
   private JPanel panelName, panelRoll, panelSignOut;
   private JTree manageTree;
   private DefaultMutableTreeNode manageMenu, list, drug, supply, setting;
@@ -22,7 +22,6 @@ public class Home {
   public Home() {
     // Create Objects
     frame = new JFrame("Primary Care Hospital Management System");
-    mainPanel = new JPanel();
     sideBar = new JPanel();
     contentPanel = new JPanel();
     pagePanel = new JPanel();
