@@ -7,11 +7,14 @@ import javax.swing.JPanel;
 public class SignInController implements ActionListener {
   private SignIn signIn = new SignIn();
   private SignUp signup = new SignUp();
-
+  // private SignUpController signupController = new SignUpController();
 
   public SignInController() {
     signIn.getButtonLogin().addActionListener(this);
     signIn.getButtonRegister().addActionListener(this);
+
+    signup.getButtonSignUp().addActionListener(this);
+    signup.getButtonCancel().addActionListener(this);
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -20,6 +23,8 @@ public class SignInController implements ActionListener {
       signIn.getFrame().dispose();
     } else if (e.getSource() == signIn.getButtonRegister()) {
       this.changeContent(signup);
+    } else if (e.getSource() == signup.getButtonCancel()) {
+      this.changeContent(signIn.getPanelSignin());
     }
   }
 

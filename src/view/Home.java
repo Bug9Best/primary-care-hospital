@@ -84,7 +84,7 @@ public class Home {
     list = new DefaultMutableTreeNode("Patient List");
     drug = new DefaultMutableTreeNode("Drug");
     supply = new DefaultMutableTreeNode("Supply");
-    setting = new DefaultMutableTreeNode("Change Password");
+    setting = new DefaultMutableTreeNode("Settiings");
 
     // Add Components
     manageMenu.add(list);

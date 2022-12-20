@@ -6,7 +6,7 @@ import java.awt.*;
 public class SignIn {
   // Declare Attributes
   private JFrame frame;
-  private JPanel panelMain, panelImg, panelForm, form, panelText, panelButton;
+  private JPanel panelMain, panelSignin, panelImg, panelForm, form, panelText, panelButton;
   private JLabel img, labelUsername, labelPassword;
   private JTextField textFieldUsername;
   private JPasswordField texFieldPassword;
@@ -16,6 +16,7 @@ public class SignIn {
     // Create Objects
     frame = new JFrame("Primary Care Hospital Management System");
     panelMain = new JPanel();
+    panelSignin = new JPanel();
     panelImg = new JPanel();
     panelForm = new JPanel();
     form = new JPanel();
@@ -32,7 +33,7 @@ public class SignIn {
     // Set Layout
     form.setLayout(new GridLayout(2, 1, 0, 20));
     panelText.setLayout(new GridLayout(4, 1));
-    panelMain.setLayout(new BorderLayout());
+    panelSignin.setLayout(new BorderLayout());
 
     // Set Style
     buttonLogin.setPreferredSize(new Dimension(200, 35));
@@ -59,8 +60,9 @@ public class SignIn {
     form.add(panelButton);
     panelForm.add(form);
     panelImg.add(img);
-    panelMain.add(panelImg, BorderLayout.WEST);
-    panelMain.add(panelForm);
+    panelSignin.add(panelImg, BorderLayout.WEST);
+    panelSignin.add(panelForm);
+    panelMain.add(panelSignin);
     frame.add(panelMain);
 
     // Frame Configurations
@@ -78,6 +80,10 @@ public class SignIn {
     return panelMain;
   }
 
+  public JPanel getPanelSignin() {
+    return panelSignin;
+  }
+
   public JButton getButtonLogin() {
     return buttonLogin;
   }
@@ -85,5 +91,4 @@ public class SignIn {
   public JButton getButtonRegister() {
     return buttonRegister;
   }
-
 }
