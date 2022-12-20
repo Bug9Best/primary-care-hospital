@@ -10,7 +10,6 @@ public class Drugs extends JPanel {
   private JButton btnAdd, btnDelete;
   private JTable drugTable;
 
-
   String data[][] = {
       { "Row1/1", "Row1/2", "Row1/3", "Row1/3" },
       { "Row2/1", "Row2/2", "Row2/3", "Row1/3" },
