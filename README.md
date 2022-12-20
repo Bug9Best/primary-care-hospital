@@ -13,8 +13,8 @@
 
 ## Versioning
  
-  1. JDK (java) Version 18
-  2. Vscode Version 1.74
+  ***1. JDK (java)*** Version 18
+  ***2. Vscode*** Version 1.74
 
 ## Project creator team
   
