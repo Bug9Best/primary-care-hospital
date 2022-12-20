@@ -18,7 +18,7 @@
 
 ## Project creator team
   
-  * 64070047 Thavith Javisooth -*Font end*-
-  * 64070146 Natthaphon Ditthawiboon -*Back end*-
-  * 64070150 Tritham Saengduan -*UX/UI*-
-  * 64070152 Tinnaphum Kerdin -*Document*-
+  * ***64070047 Thavith Javisooth*** -*Font end*-  
+  * ***64070146 Natthaphon Ditthaviboon*** -*Back end*-
+  * ***64070150 Tritham Saengduan*** -*UX/UI*-
+  * ***64070152 Tinnaphum Kerdin*** -*Document*-
