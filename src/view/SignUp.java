@@ -16,7 +16,6 @@ public class SignUp extends JFrame implements ActionListener {
     private JComboBox<String> comboBoxRoll;
     private JPasswordField textFieldPassword;
     private JButton buttonSignUp, buttonCancel;
-    private SignIn signin;
 
     public SignUp() {
         // Create Objects
@@ -97,7 +96,7 @@ public class SignUp extends JFrame implements ActionListener {
     }
 
     public void signUp(User user) {
-        String sql = "INSERT INTO users (name, roll, username, password) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO users (name, role, username, password) VALUES (?, ?, ?, ?)";
         try (Connection con = ConnnectDB.ConnectDB()) {
 
         try (PreparedStatement statement = con.prepareStatement(sql)) {
@@ -113,10 +112,11 @@ public class SignUp extends JFrame implements ActionListener {
         resetField();
         } catch (SQLException e) {
         JOptionPane.showMessageDialog(SignIn.frame, "You're Sign Up fail. Please import primary_care_hospital.sql before using thisapplication.", "Error!",JOptionPane.ERROR_MESSAGE);
+        System.out.println(e.getMessage());
         }
 
         } catch (SQLException e) {
-        System.out.println("Connect Failed!!!");
+        System.out.println(e.getMessage());
         }
     }
     

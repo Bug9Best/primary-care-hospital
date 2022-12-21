@@ -7,9 +7,9 @@ public class User {
     this("", "", "", "");
   }
 
-  public User(String name, String roll, String username, String password) {
+  public User(String name, String role, String username, String password) {
     this.name = name;
-    this.role = roll;
+    this.role = role;
     this.username = username;
     this.password = password;
   }

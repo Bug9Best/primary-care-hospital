@@ -17,7 +17,7 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
   private Home home = new Home();
   private UserModel userModel;
 
-  public HomeController() {
+  public HomeController(UserModel userModel) {
     this.userModel = userModel;
     home.displayFrame();
     home.getFrame().addWindowListener(this);

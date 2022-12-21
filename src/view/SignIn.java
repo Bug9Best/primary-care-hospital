@@ -1,12 +1,12 @@
 package view;
 
-
-import view.*;
 import model.*;
-import controller.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import controller.HomeController;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.sql.Connection;
@@ -26,7 +26,6 @@ public class SignIn implements ActionListener {
   private JMenuBar menuBar;
   private JMenu file;
   private JMenuItem itemAbout, itemExit;
-  private SignUp signup;
   private UserModel userModel;
 
   public SignIn() {
@@ -69,7 +68,7 @@ public class SignIn implements ActionListener {
     panelImg.setBackground(Color.WHITE);
     panelForm.setBackground(Color.WHITE);
     panelMain.setBackground(Color.WHITE);
-    
+
     // Add Action Listener
     buttonLogin.addActionListener(this);
     buttonRegister.addActionListener(this);
@@ -124,7 +123,7 @@ public class SignIn implements ActionListener {
     }
   }
 
-  public boolean Signin(String username, String password) {
+  public void Signin(String username, String password) {
     String sql = "SELECT * FROM users WHERE username=? AND password=?";
     try (Connection con = ConnnectDB.ConnectDB()) {
 
@@ -134,20 +133,18 @@ public class SignIn implements ActionListener {
         statement.setString(2, getTextFieldPasswordValue());
         statement.executeQuery();
         ResultSet result = statement.executeQuery();
-        if (result.next()) {
-          User user = new User(result.getString("name"), result.getString("role"), result.getString("username"), result.getString("password"));
+        if (result.next() && result != null) {
+          User user = new User(result.getString("name"), result.getString("role"), result.getString("username"),result.getString("password"));
           userModel = new UserModel(user);
-          new HomeController();
+          new HomeController(userModel);
           frame.dispose();
-          return true;
         } else {
           JOptionPane.showMessageDialog(SignIn.frame, "Your username or password are wrong", "Error!",JOptionPane.ERROR_MESSAGE);
-          return false;
         }
       }
     } catch (SQLException ex) {
-      return false;
-      }
+      System.out.println("Error: " + ex.getMessage());
+    }
   }
 
   public JTextField getTextFieldUsername() {
