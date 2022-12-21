@@ -15,7 +15,7 @@ public class SignUpController {
       try (PreparedStatement statement = con.prepareStatement(sql)) {
         con.prepareStatement(sql);
         statement.setString(1, user.getName());
-        statement.setString(2, user.getRoll());
+        statement.setString(2, user.getRole());
         statement.setString(3, user.getUsername());
         statement.setString(4, user.getPassword());
         statement.execute();

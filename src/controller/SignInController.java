@@ -65,10 +65,10 @@ public class SignInController implements ActionListener {
         statement.setString(2, signIn.getTextFieldPasswordValue());
         statement.executeQuery();
         ResultSet result = statement.executeQuery();
-        if (result.next()) {
-          User user = new User(result.getString("username"), result.getString("name"), result.getString("username"), result.getString("Password"));
+        if (result.next() && result != null) {
+          User user = new User(result.getString("name"), result.getString("role"), result.getString("username"), result.getString("password"));
           userModel = new UserModel(user);
-          new HomeController();
+          new HomeController(userModel);
           signIn.getFrame().dispose();
           return true;
         } else {

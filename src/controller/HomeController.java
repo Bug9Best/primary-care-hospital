@@ -1,6 +1,7 @@
 package controller;
 
 import view.*;
+import model.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,7 +13,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class HomeController implements ActionListener, TreeSelectionListener {
+public class HomeController implements ActionListener, TreeSelectionListener, WindowListener {
   private Home home = new Home();
   private Lists lists = new Lists();
   private Drugs drugs = new Drugs();
@@ -21,9 +22,13 @@ public class HomeController implements ActionListener, TreeSelectionListener {
   private ListsController ListsController = new ListsController();
   private DrugsController DrugsController = new DrugsController();
   private SuppliesController SuppliesController = new SuppliesController();
+  private User user;
+  private UserModel userModel;
 
-  public HomeController() {
+  public HomeController(UserModel userModel) {
+    this.userModel = userModel;
     home.displayFrame();
+    home.getFrame().addWindowListener(this);
     home.getitemAbout().addActionListener(this);
     home.getItemExit().addActionListener(this);
     home.getManageTree().addTreeSelectionListener(this);
@@ -41,6 +46,7 @@ public class HomeController implements ActionListener, TreeSelectionListener {
     supplies.getSupplyTable().getSelectionModel().addListSelectionListener(SuppliesController);
   }
 
+  @Override
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == home.getitemAbout()) {
       try {
@@ -55,6 +61,7 @@ public class HomeController implements ActionListener, TreeSelectionListener {
     }
   }
 
+  @Override
   public void valueChanged(TreeSelectionEvent e) {
     if (e.getSource() == home.getManageTree()) {
       DefaultMutableTreeNode node = (DefaultMutableTreeNode) home.getManageTree().getLastSelectedPathComponent();
@@ -79,5 +86,35 @@ public class HomeController implements ActionListener, TreeSelectionListener {
     home.getContentPanel().add(next);
     home.getContentPanel().revalidate();
     home.getContentPanel().repaint();
+  }
+
+  @Override
+  public void windowOpened(WindowEvent e) {
+    home.getLabelName().setText(userModel.getUser().getName());
+    home.getLabelRole().setText(userModel.getUser().getRole());
+  }
+
+  @Override
+  public void windowClosing(WindowEvent e) {
+  }
+
+  @Override
+  public void windowClosed(WindowEvent e) {
+  }
+
+  @Override
+  public void windowIconified(WindowEvent e) {
+  }
+
+  @Override
+  public void windowDeiconified(WindowEvent e) {
+  }
+
+  @Override
+  public void windowActivated(WindowEvent e) {
+  }
+
+  @Override
+  public void windowDeactivated(WindowEvent e) {
   }
 }

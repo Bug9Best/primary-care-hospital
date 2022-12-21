@@ -9,14 +9,15 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Home {
   // Define Objects
   private JFrame frame;
-  private JPanel  sideBar, contentPanel, pagePanel;
+  private JPanel sideBar, contentPanel, pagePanel;
   private JPanel panelName, panelRoll, panelSignOut;
   private JTree manageTree;
   private DefaultMutableTreeNode manageMenu, list, drug, supply, setting;
   private JMenuBar menuBar;
   private JMenu file;
   private JMenuItem itemAbout, itemExit;
-  private JLabel labelName, labelRoll;
+  private JLabel labelName, labelRole;
+
   private JButton bottonSignOut;
 
   public Home() {
@@ -28,14 +29,13 @@ public class Home {
     panelName = new JPanel();
     panelRoll = new JPanel();
     panelSignOut = new JPanel();
-    labelName = new JLabel("Natthaphon Ditthaviboon");
-    labelRoll = new JLabel("Technical Nurse");
+    labelName = new JLabel("");
+    labelRole = new JLabel("");
     bottonSignOut = new JButton("Sign Out");
     menuBar = new JMenuBar();
     file = new JMenu("File");
     itemAbout = new JMenuItem("About this Program");
     itemExit = new JMenuItem("Exit Program");
-
     frame.setLayout(new BorderLayout());
 
     displayMenuBar();
@@ -67,10 +67,10 @@ public class Home {
     panelSignOut.setBackground(Color.WHITE);
 
     labelName.setFont(new Font("Arial", Font.BOLD, 16));
-    labelRoll.setFont(new Font("Arial", Font.PLAIN, 14));
+    labelRole.setFont(new Font("Arial", Font.PLAIN, 14));
 
     panelName.add(labelName);
-    panelRoll.add(labelRoll);
+    panelRoll.add(labelRole);
     panelSignOut.add(bottonSignOut);
 
     pagePanel.add(panelName);
@@ -148,5 +148,13 @@ public class Home {
 
   public DefaultMutableTreeNode getSetting() {
     return setting;
+  }
+
+  public JLabel getLabelName() {
+    return labelName;
+  }
+
+  public JLabel getLabelRole() {
+    return labelRole;
   }
 }

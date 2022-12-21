@@ -1,7 +1,7 @@
 package model;
 
 public class User {
-  private String name, roll, username, password;
+  private String name, role, username, password;
 
   public User() {
     this("", "", "", "");
@@ -9,7 +9,7 @@ public class User {
 
   public User(String name, String roll, String username, String password) {
     this.name = name;
-    this.roll = roll;
+    this.role = roll;
     this.username = username;
     this.password = password;
   }
@@ -22,12 +22,12 @@ public class User {
     this.name = name;
   }
 
-  public String getRoll() {
-    return roll;
+  public String getRole() {
+    return role;
   }
 
-  public void setRoll(String roll) {
-    this.roll = roll;
+  public void setRole(String role) {
+    this.role = role;
   }
 
   public String getUsername() {
