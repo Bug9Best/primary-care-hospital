@@ -19,7 +19,6 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
   private Drugs drugs = new Drugs();
   private Supplies supplies = new Supplies();
   private Settings settings = new Settings();
-  private SignInController SignInController;
   private ListsController ListsController = new ListsController();
   private DrugsController DrugsController = new DrugsController();
   private SuppliesController SuppliesController = new SuppliesController();
@@ -97,6 +96,8 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
   public void windowOpened(WindowEvent e) {
     home.getLabelName().setText(userModel.getUser().getName());
     home.getLabelRole().setText(userModel.getUser().getRole());
+    settings.getTextFieldName().setText(userModel.getUser().getName());
+    settings.getTextFieldRole().setText(userModel.getUser().getRole());
   }
 
   @Override
