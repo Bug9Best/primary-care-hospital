@@ -9,7 +9,7 @@ public class Settings extends JPanel {
   private JLabel labelTitle, labelName, labelRoll, labelPassword, labeloldPassword;
   private JTextField textFieldName, textFieldRoll;
   private JPasswordField textFieldOldPassword, textFieldPassword;
-  private JButton buttonConfirm, bttonCancle;
+  private JButton buttonConfirm, buttonCancle;
 
   public Settings() {
     // Create Objects
@@ -25,7 +25,7 @@ public class Settings extends JPanel {
     textFieldOldPassword = new JPasswordField();
     textFieldPassword = new JPasswordField();
     buttonConfirm = new JButton("Confirm");
-    bttonCancle = new JButton("Cancle");
+    buttonCancle = new JButton("Cancle");
 
     // Set Layout
     this.setLayout(new BorderLayout());
@@ -34,7 +34,7 @@ public class Settings extends JPanel {
 
     // Set Style
     buttonConfirm.setPreferredSize(new Dimension(200, 35));
-    bttonCancle.setPreferredSize(new Dimension(200, 35));
+    buttonCancle.setPreferredSize(new Dimension(200, 35));
     labelTitle.setFont(new Font("InaiMathi", Font.BOLD, 24));
     labelTitle.setHorizontalAlignment(JLabel.CENTER);
     panelForm.setBorder(BorderFactory.createEmptyBorder(100, 50, 100, 50));
@@ -50,7 +50,7 @@ public class Settings extends JPanel {
     panelForm.add(textFieldOldPassword);
     panelForm.add(labelPassword);
     panelForm.add(textFieldPassword);
-    panelButton.add(bttonCancle);
+    panelButton.add(buttonCancle);
     panelButton.add(buttonConfirm);
     panelForm.add(new JLabel());
     panelForm.add(panelButton);
