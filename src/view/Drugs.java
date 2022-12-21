@@ -1,6 +1,9 @@
 package view;
 
+import model.*;
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 
 public class Drugs extends JPanel {
@@ -9,35 +12,9 @@ public class Drugs extends JPanel {
   private JLabel labelTitle;
   private JButton btnAdd, btnDelete;
   private JTable drugTable;
-
-  String data[][] = {
-      { "Row1/1", "Row1/2", "Row1/3", "Row1/3" },
-      { "Row2/1", "Row2/2", "Row2/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row4/1", "Row4/2", "Row4/3", "Row1/3" },
-  };
-  String header[] = { "No.", "Drug Name", "In Stock", "Last Update" };
+  private String data[][] = {};
+  private String header[] = { "No.", "Drug Name", "Description", "Side Effects", "In Stock" };
+  
 
   public Drugs() {
     // Create Objects
@@ -47,6 +24,13 @@ public class Drugs extends JPanel {
     labelTitle = new JLabel("Drugs List");
     btnAdd = new JButton("Add");
     btnDelete = new JButton("Delete");
+    ArrayList<Drug> drugs = DrugModel.getDrugsDB();
+    data = new String[drugs.size()][];
+    for (int i = 0; i < drugs.size(); i++) {
+      data[i] = new String[] { String.valueOf(i + 1), drugs.get(i).getName(), drugs.get(i).getDescription(),
+          drugs.get(i).getSideEffects(), String.valueOf(drugs.get(i).getStorage()) };
+    }
+
     drugTable = new JTable(data, header) {
       public boolean isCellEditable(int row, int column) {
         return false;
@@ -82,6 +66,7 @@ public class Drugs extends JPanel {
     this.setPreferredSize(new Dimension(1020, 648));
     this.setVisible(true);
   }
+
   public JButton getBtnAdd() {
     return btnAdd;
   }

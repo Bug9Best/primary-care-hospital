@@ -1,12 +1,17 @@
 package view;
 
+import model.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class AddDrug implements ActionListener {
 
     // Declare Attributes
+    private Drug drug;
     private JFrame frame;
     private JPanel panelForm;
     private JPanel panelName, panelDescription, panelSideEffects, panelDose, panelStorage, panelButton;
@@ -39,7 +44,7 @@ public class AddDrug implements ActionListener {
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
-        panelForm.setLayout(new GridLayout(7, 1));
+        panelForm.setLayout(new GridLayout(6, 1));
         panelName.setLayout(new GridLayout(2, 1));
         panelDescription.setLayout(new GridLayout(2, 1));
         panelSideEffects.setLayout(new GridLayout(2, 1));
@@ -87,50 +92,78 @@ public class AddDrug implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonAddList) {
-            System.out.println("Add List");
+            drug = new Drug(getTextFieldNameValue(), getTextFieldDescriptionValue(), getTextFieldSideEffectsValue(), getTextFieldDrugDoseValue(), getTextFieldStorageValue());
+            this.AddDrugDB(drug);
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
         }
+    }
+
+    public void AddDrugDB(Drug drug) {
+        String sql = "INSERT INTO drugs (name, description, sideEffects, dosage, storage) VALUES (?, ?, ?, ?, ?)";
+        try (Connection con = ConnnectDB.ConnectDB()) {
+
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
+                con.prepareStatement(sql);
+                statement.setString(1, drug.getName());
+                statement.setString(2, drug.getDescription());
+                statement.setString(3, drug.getSideEffects());
+                statement.setString(4, drug.getDosage());
+                statement.setInt(5, drug.getStorage());
+                statement.execute();
+                System.out.println("Add to DB Successfully");
+                getFrame().dispose();
+            } catch (SQLException e) {
+                System.out.println("Add to DB Failed");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Connect Failed!!!");
+        }
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 
     public JTextField getTextFieldName() {
         return textFieldName;
     }
 
-    public void setTextFieldName(JTextField textFieldName) {
-        this.textFieldName = textFieldName;
-    }
-
     public JTextField getTextFieldDrugDose() {
         return textFieldDrugDose;
-    }
-
-    public void setTextFieldDrugDose(JTextField textFieldDrugDose) {
-        this.textFieldDrugDose = textFieldDrugDose;
     }
 
     public JTextField getTextFieldSideEffects() {
         return textFieldSideEffects;
     }
 
-    public void setTextFieldSideEffects(JTextField textFieldSideEffects) {
-        this.textFieldSideEffects = textFieldSideEffects;
-    }
-
     public JTextField getTextFieldStorage() {
         return textFieldStorage;
-    }
-
-    public void setTextFieldStorage(JTextField textFieldStorage) {
-        this.textFieldStorage = textFieldStorage;
     }
 
     public JTextArea getTextFieldDescription() {
         return textFieldDescription;
     }
 
-    public void setTextFieldDescription(JTextArea textFieldDescription) {
-        this.textFieldDescription = textFieldDescription;
+    public String getTextFieldNameValue() {
+        return textFieldName.getText();
+    }
+
+    public String getTextFieldDrugDoseValue() {
+        return textFieldDrugDose.getText();
+    }
+
+    public String getTextFieldSideEffectsValue() {
+        return textFieldSideEffects.getText();
+    }
+
+    public int getTextFieldStorageValue() {
+        return Integer.parseInt(textFieldStorage.getText()) ;
+    }
+
+    public String getTextFieldDescriptionValue() {
+        return textFieldDescription.getText();
     }
 
     public JButton getButtonAddList() {

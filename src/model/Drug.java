@@ -6,11 +6,10 @@ public class Drug {
   private String description;
   private String sideEffects;
   private String dosage;
-  private String storage;
-  private String price;
+  private int storage;
 
   public Drug() {
-    this("", "", "", "", "", "");
+    this("", "", "", "", 0);
   }
 
   public Drug(
@@ -18,14 +17,12 @@ public class Drug {
       String description,
       String sideEffects,
       String dosage,
-      String storage,
-      String price) {
+      int storage) {
     this.name = name;
     this.description = description;
     this.sideEffects = sideEffects;
     this.dosage = dosage;
     this.storage = storage;
-    this.price = price;
   }
 
   public String getName() {
@@ -44,11 +41,7 @@ public class Drug {
     return dosage;
   }
 
-  public String getStorage() {
+  public int getStorage() {
     return storage;
-  }
-
-  public String getPrice() {
-    return price;
   }
 }

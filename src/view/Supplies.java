@@ -10,34 +10,8 @@ public class Supplies extends JPanel {
   private JButton btnAdd, btnDelete;
   private JTable supplyTable;
 
-  String data[][] = {
-      { "Row1/1", "Row1/2", "Row1/3", "Row1/3" },
-      { "Row2/1", "Row2/2", "Row2/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row4/1", "Row4/2", "Row4/3", "Row1/3" },
-  };
-  String header[] = { "No.", "Supply Name", "In Stock", "Last Update" };
+  String data[][] = {};
+  String header[] = { "No.", "Supply Name", "Description", "In Stock" };
 
   public Supplies() {
     // Create Objects

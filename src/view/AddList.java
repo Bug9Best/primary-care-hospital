@@ -9,17 +9,18 @@ public class AddList implements ActionListener {
     // Declare Attributes
     private JFrame frame;
     private JPanel panelForm;
-    private JPanel panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
+    private JPanel panelDateVisit, panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
     private JLabel labelDateVisit, labelName, labelCoC, labelDrug, labelDose, labelSupply, labelSupplyAmount;
-    private JTextField textFieldName, textFieldDrugDose, textFieldSupply;
+    private JTextField textFieldDateVisit, textFieldName, textFieldDrugDose, textFieldSupply;
     private JTextArea textFieldCoC;
-    private JComboBox checkBoxDrug, checkBoxSuppl;
+    private JComboBox<String> checkBoxDrug, checkBoxSuppl;
     private JButton buttonAddList, buttonCancel;
 
     public AddList() {
         // Create Objects
         frame = new JFrame("Add List");
         panelForm = new JPanel();
+        panelDateVisit = new JPanel();
         panelName = new JPanel();
         panelCoC = new JPanel();
         panelDrug = new JPanel();
@@ -34,6 +35,7 @@ public class AddList implements ActionListener {
         labelDose = new JLabel("Drug Dose");
         labelSupply = new JLabel("Supply");
         labelSupplyAmount = new JLabel("Supply Amount");
+        textFieldDateVisit = new JTextField("Auto",20);
         textFieldName = new JTextField(20);
         textFieldCoC = new JTextArea(3, 20);
         textFieldDrugDose = new JTextField(20);
@@ -44,7 +46,8 @@ public class AddList implements ActionListener {
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
-        panelForm.setLayout(new GridLayout(7, 1));
+        panelForm.setLayout(new GridLayout(8, 1));
+        panelDateVisit.setLayout(new GridLayout(2, 1));
         panelName.setLayout(new GridLayout(2, 1));
         panelCoC.setLayout(new GridLayout(2, 1));
         panelDrug.setLayout(new GridLayout(2, 1));
@@ -54,6 +57,8 @@ public class AddList implements ActionListener {
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         // Set Style
+        textFieldDateVisit.setEditable(false);
+        textFieldDateVisit.setBackground(new Color(239, 228, 176, 100));
         buttonAddList.setSize(200, 35);
         buttonAddList.setPreferredSize(new Dimension(200, 35));
         buttonCancel.setPreferredSize(new Dimension(200, 35));
@@ -63,6 +68,8 @@ public class AddList implements ActionListener {
         buttonCancel.addActionListener(this);
 
         // Add Components
+        panelDateVisit.add(labelDateVisit);
+        panelDateVisit.add(textFieldDateVisit);
         panelName.add(labelName);
         panelName.add(textFieldName);
         panelCoC.add(labelCoC);
@@ -77,6 +84,7 @@ public class AddList implements ActionListener {
         panelSupplyAmount.add(textFieldSupply);
         panelButton.add(buttonCancel);
         panelButton.add(buttonAddList);
+        panelForm.add(panelDateVisit);
         panelForm.add(panelName);
         panelForm.add(panelCoC);
         panelForm.add(panelDrug);
@@ -87,7 +95,7 @@ public class AddList implements ActionListener {
         frame.add(panelForm);
 
         // Frame Configurations
-        frame.setSize(600, 400);
+        frame.setSize(600, 500);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

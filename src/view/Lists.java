@@ -11,33 +11,7 @@ public class Lists extends JPanel {
   private JButton btnAdd, btnDelete;
   private JTable listTable;
 
-  String data[][] = {
-      { "Row1/1", "Row1/2", "Row1/3", "Row1/3" },
-      { "Row2/1", "Row2/2", "Row2/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row3/1", "Row3/2", "Row3/3", "Row1/3" },
-      { "Row4/1", "Row4/2", "Row4/3", "Row1/3" },
-  };
+  String data[][] = {};
   String header[] = { "No.", "Patient Name", "Chief of Complaint", "Visit Time" };
 
   public Lists() {
