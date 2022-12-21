@@ -4,6 +4,8 @@ import java.awt.event.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import view.AddList;
+
 public class ListsController implements ActionListener, ListSelectionListener {
 
   public ListsController() {
@@ -11,7 +13,7 @@ public class ListsController implements ActionListener, ListSelectionListener {
 
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand() == "Add") {
-      System.out.println("Add List");
+      AddList addList = new AddList();
     } else if (e.getActionCommand() == "Delete") {
       System.out.println("Delete List");
     }
