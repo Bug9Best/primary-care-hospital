@@ -1,11 +1,17 @@
 package view;
 
+import model.*;
+
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
-import model.UserModel;
 
-public class Settings extends JPanel {
+
+public class Settings extends JPanel implements ActionListener {
   // Declare Attributes
   private JPanel panelForm, panelButton;
   private JLabel labelTitle, labelName, labelRole, labelPassword, labeloldPassword;
@@ -15,6 +21,7 @@ public class Settings extends JPanel {
   private UserModel userModel;
 
   public Settings(UserModel userModel) {
+    this.userModel = userModel;
     // Create Objects
     panelForm = new JPanel();
     panelButton = new JPanel();
@@ -40,6 +47,9 @@ public class Settings extends JPanel {
     labelTitle.setHorizontalAlignment(JLabel.CENTER);
     panelForm.setBorder(BorderFactory.createEmptyBorder(100, 50, 100, 50));
 
+    // Add Action Listener
+    buttonConfirm.addActionListener(this);
+
     // Add Components
     panelForm.add(labelTitle);
     panelForm.add(labelName);
@@ -62,6 +72,43 @@ public class Settings extends JPanel {
     // Set Default Value
     textFieldName.setText(userModel.getUser().getName());
     textFieldRole.setText(userModel.getUser().getRole());
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getActionCommand() == "Confirm") {
+      if (textFieldOldPassword.getPassword().length == 0) {
+        JOptionPane.showMessageDialog(null, "Please enter old password");
+      } else if (textFieldPassword.getPassword().length == 0) {
+        JOptionPane.showMessageDialog(null, "Please enter new password");
+      } else if (textFieldOldPassword.getPassword().length != 0 && textFieldPassword.getPassword().length != 0) {
+        if (getTextFieldOldPasswordValue().equals(userModel.getUser().getPassword())) {
+          updateUser(getTextFieldPasswordValue());
+        } else {
+          JOptionPane.showMessageDialog(null, "Old password is incorrect");
+        }
+      }
+    }
+    
+  }
+  
+  public void updateUser(String newPassword) {
+    String sql = "UPDATE users SET password = ? WHERE username = ?";
+    try (Connection con = ConnnectDB.ConnectDB()) {
+      try (PreparedStatement statement = con.prepareStatement(sql)) {
+        con.prepareStatement(sql);
+        statement.setString(1, newPassword);
+        statement.setString(2, userModel.getUser().getUsername());
+        statement.execute();
+        JOptionPane.showMessageDialog(null, "Update password successfully");
+        userModel.getUser().setPassword(newPassword);
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+      }
+
+    } catch (SQLException e) {
+      System.out.println("Connect Failed!!!");
+    }
   }
 
   public JTextField getTextFieldName() {
@@ -99,5 +146,4 @@ public class Settings extends JPanel {
     }
     return value;
   }
-
 }

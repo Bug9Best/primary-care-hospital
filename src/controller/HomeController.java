@@ -17,7 +17,7 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
   private Home home = new Home();
   private UserModel userModel;
 
-  public HomeController(UserModel userModel) {
+  public HomeController() {
     this.userModel = userModel;
     home.displayFrame();
     home.getFrame().addWindowListener(this);
@@ -41,7 +41,7 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
       System.exit(0);
     } else if (e.getSource() == home.getButtonSignOut()) {
       home.getFrame().dispose();
-      new SignInController();
+      new SignIn();
     }
   }
 

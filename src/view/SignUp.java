@@ -1,9 +1,14 @@
 package view;
 
+import model.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.*;
 
-public class SignUp extends JPanel {
+public class SignUp extends JFrame implements ActionListener {
     // Declare Attributes
     private JPanel panelImg, panelForm, form, panelText, panelButton;
     private JLabel img, labelName, labelRoll, labelUsername, labelPassword;
@@ -11,6 +16,7 @@ public class SignUp extends JPanel {
     private JComboBox<String> comboBoxRoll;
     private JPasswordField textFieldPassword;
     private JButton buttonSignUp, buttonCancel;
+    private SignIn signin;
 
     public SignUp() {
         // Create Objects
@@ -50,6 +56,10 @@ public class SignUp extends JPanel {
         panelForm.setBackground(Color.WHITE);
         this.setBackground(Color.WHITE);
 
+        // Add Action Listener
+        buttonSignUp.addActionListener(this);
+        buttonCancel.addActionListener(this);
+
         // Add Components
         panelText.add(labelName);
         panelText.add(textFieldName);
@@ -67,7 +77,56 @@ public class SignUp extends JPanel {
         panelImg.add(img);
         this.add(panelImg, BorderLayout.EAST);
         this.add(panelForm);
+
+        // Frame Config
+        this.setResizable(false);
+        this.setSize(1280, 720);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == buttonSignUp) {
+            User user = new User(getTextFieldNameValue(), getTextFieldRollValue(), getTextFieldUsernameValue(), getTextFieldPasswordValue());
+            signUp(user);
+        } else if (e.getSource() == buttonCancel) {
+            new SignIn();
+            this.dispose();
+        }
+    }
+
+    public void signUp(User user) {
+        String sql = "INSERT INTO users (name, roll, username, password) VALUES (?, ?, ?, ?)";
+        try (Connection con = ConnnectDB.ConnectDB()) {
+
+        try (PreparedStatement statement = con.prepareStatement(sql)) {
+        con.prepareStatement(sql);
+        statement.setString(1, getTextFieldNameValue());
+        statement.setString(2, getTextFieldRollValue());
+        statement.setString(3, getTextFieldUsernameValue());
+        statement.setString(4, getTextFieldPasswordValue());
+        statement.execute();
+        JOptionPane.showMessageDialog(SignIn.frame, "You're Sign Up success. Let go to Sign in.", "Success!", JOptionPane.INFORMATION_MESSAGE);
+        new SignIn();
+        this.dispose();
+        resetField();
+        } catch (SQLException e) {
+        JOptionPane.showMessageDialog(SignIn.frame, "You're Sign Up fail. Please import primary_care_hospital.sql before using thisapplication.", "Error!",JOptionPane.ERROR_MESSAGE);
+        }
+
+        } catch (SQLException e) {
+        System.out.println("Connect Failed!!!");
+        }
+    }
+    
+  public void resetField() {
+    getTextFieldName().setText("");
+    getTextFieldRoll().setSelectedIndex(0);
+    getTextFieldUsername().setText("");
+    getTextFieldPassword().setText("");
+  }
+    
 
     public JButton getButtonSignUp() {
         return buttonSignUp;
@@ -112,4 +171,5 @@ public class SignUp extends JPanel {
         }
         return value;
     }
+
 }

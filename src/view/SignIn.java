@@ -1,9 +1,21 @@
 package view;
 
-import javax.swing.*;
-import java.awt.*;
 
-public class SignIn {
+import view.*;
+import model.*;
+import controller.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.net.URI;
+
+public class SignIn implements ActionListener {
   // Declare Attributes
   public static JFrame frame;
   private JPanel panelMain, panelSignin, panelImg, panelForm, form, panelText, panelButton;
@@ -14,6 +26,8 @@ public class SignIn {
   private JMenuBar menuBar;
   private JMenu file;
   private JMenuItem itemAbout, itemExit;
+  private SignUp signup;
+  private UserModel userModel;
 
   public SignIn() {
     // Create Objects
@@ -55,6 +69,12 @@ public class SignIn {
     panelImg.setBackground(Color.WHITE);
     panelForm.setBackground(Color.WHITE);
     panelMain.setBackground(Color.WHITE);
+    
+    // Add Action Listener
+    buttonLogin.addActionListener(this);
+    buttonRegister.addActionListener(this);
+    itemAbout.addActionListener(this);
+    itemExit.addActionListener(this);
 
     // Add Components
     panelText.add(labelUsername);
@@ -84,24 +104,50 @@ public class SignIn {
     frame.setVisible(true);
   }
 
-  public JFrame getFrame() {
-    return frame;
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getSource() == buttonLogin) {
+      Signin(null, null);
+    } else if (e.getSource() == buttonRegister) {
+      new SignUp();
+      frame.dispose();
+    } else if (e.getSource() == itemAbout) {
+      try {
+        Desktop.getDesktop().browse(new URI("https://github.com/Bug9Best/primary-care-hospital"));
+      } catch (IOException ex) {
+        System.out.println("Error: " + ex.getMessage());
+      } catch (URISyntaxException ex) {
+        System.out.println("Error: " + ex.getMessage());
+      }
+    } else if (e.getSource() == itemExit) {
+      System.exit(0);
+    }
   }
 
-  public JPanel getPanelMain() {
-    return panelMain;
-  }
+  public boolean Signin(String username, String password) {
+    String sql = "SELECT * FROM users WHERE username=? AND password=?";
+    try (Connection con = ConnnectDB.ConnectDB()) {
 
-  public JPanel getPanelSignin() {
-    return panelSignin;
-  }
-
-  public JButton getButtonLogin() {
-    return buttonLogin;
-  }
-
-  public JButton getButtonRegister() {
-    return buttonRegister;
+      try (PreparedStatement statement = con.prepareStatement(sql)) {
+        con.prepareStatement(sql);
+        statement.setString(1, getTextFieldUsernameValue());
+        statement.setString(2, getTextFieldPasswordValue());
+        statement.executeQuery();
+        ResultSet result = statement.executeQuery();
+        if (result.next()) {
+          User user = new User(result.getString("name"), result.getString("role"), result.getString("username"), result.getString("password"));
+          userModel = new UserModel(user);
+          new HomeController();
+          frame.dispose();
+          return true;
+        } else {
+          JOptionPane.showMessageDialog(SignIn.frame, "Your username or password are wrong", "Error!",JOptionPane.ERROR_MESSAGE);
+          return false;
+        }
+      }
+    } catch (SQLException ex) {
+      return false;
+      }
   }
 
   public JTextField getTextFieldUsername() {
