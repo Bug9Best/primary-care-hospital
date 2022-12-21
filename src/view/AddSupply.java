@@ -10,10 +10,9 @@ public class AddSupply implements ActionListener {
     private JFrame frame;
     private JPanel panelForm;
     private JPanel panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
-    private JLabel labelDateVisit, labelName, labelCoC, labelDrug, labelDose, labelSupply, labelSupplyAmount;
-    private JTextField textFieldName, textFieldDrugDose, textFieldSupply;
-    private JTextArea textFieldCoC;
-    private JComboBox checkBoxDrug, checkBoxSuppl;
+    private JLabel labelNameSupply, labelDescriptionSupply, labelStorageSupply;
+    private JTextField textFieldNameSupply, textFieldStorageSupply;
+    private JTextArea textFieldDescriptionSupply;
     private JButton buttonAddList, buttonCancel;
 
     public AddSupply() {
@@ -27,20 +26,13 @@ public class AddSupply implements ActionListener {
         panelSupply = new JPanel();
         panelSupplyAmount = new JPanel();
         panelButton = new JPanel();
-        labelDateVisit = new JLabel("Date of Visit");
-        labelName = new JLabel("Name");
-        labelCoC = new JLabel("Cheif of Complain");
-        labelDrug = new JLabel("Drug");
-        labelDose = new JLabel("Drug Dose");
-        labelSupply = new JLabel("Supply");
-        labelSupplyAmount = new JLabel("Supply Amount");
-        textFieldName = new JTextField(20);
-        textFieldCoC = new JTextArea(3, 20);
-        textFieldDrugDose = new JTextField(20);
-        textFieldSupply = new JTextField(20);
-        checkBoxDrug = new JComboBox();
-        checkBoxSuppl = new JComboBox();
-        buttonAddList = new JButton("Add Patient");
+        labelNameSupply = new JLabel("Name");
+        labelDescriptionSupply = new JLabel("Description");
+        labelStorageSupply = new JLabel("Storage");
+        textFieldNameSupply = new JTextField(20);
+        textFieldStorageSupply = new JTextField(20);
+        textFieldDescriptionSupply = new JTextArea(3, 20);
+        buttonAddList = new JButton("Add Drug");
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
@@ -50,7 +42,6 @@ public class AddSupply implements ActionListener {
         panelDrug.setLayout(new GridLayout(2, 1));
         panelDrugDose.setLayout(new GridLayout(2, 1));
         panelSupply.setLayout(new GridLayout(2, 1));
-        panelSupplyAmount.setLayout(new GridLayout(2, 1));
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         // Set Style
@@ -63,26 +54,20 @@ public class AddSupply implements ActionListener {
         buttonCancel.addActionListener(this);
 
         // Add Components
-        panelName.add(labelName);
-        panelName.add(textFieldName);
-        panelCoC.add(labelCoC);
-        panelCoC.add(textFieldCoC);
-        panelDrug.add(labelDrug);
-        panelDrug.add(checkBoxDrug);
-        panelDrugDose.add(labelDose);
-        panelDrugDose.add(textFieldDrugDose);
-        panelSupply.add(labelSupply);
-        panelSupply.add(checkBoxSuppl);
-        panelSupplyAmount.add(labelSupplyAmount);
-        panelSupplyAmount.add(textFieldSupply);
+        panelName.add(labelNameSupply);
+        panelName.add(textFieldNameSupply);
+        panelCoC.add(labelDescriptionSupply);
+        panelCoC.add(textFieldDescriptionSupply);
+        panelSupply.add(labelStorageSupply);
+        panelSupply.add(textFieldStorageSupply);
         panelButton.add(buttonCancel);
         panelButton.add(buttonAddList);
         panelForm.add(panelName);
         panelForm.add(panelCoC);
-        panelForm.add(panelDrug);
-        panelForm.add(panelDrugDose);
+        //panelForm.add(panelDrug);
+        //panelForm.add(panelDrugDose);
         panelForm.add(panelSupply);
-        panelForm.add(panelSupplyAmount);
+        //panelForm.add(panelSupplyAmount);
         panelForm.add(panelButton);
         frame.add(panelForm);
 
@@ -99,6 +84,30 @@ public class AddSupply implements ActionListener {
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
         }
+    }
+
+    public JTextField getTextFieldNameSupply() {
+        return textFieldNameSupply;
+    }
+
+    public void setTextFieldNameSupply(JTextField textFieldNameSupply) {
+        this.textFieldNameSupply = textFieldNameSupply;
+    }
+
+    public JTextField getTextFieldStorageSupply() {
+        return textFieldStorageSupply;
+    }
+
+    public void setTextFieldStorageSupply(JTextField textFieldStorageSupply) {
+        this.textFieldStorageSupply = textFieldStorageSupply;
+    }
+
+    public JTextArea getTextFieldDescriptionSupply() {
+        return textFieldDescriptionSupply;
+    }
+
+    public void setTextFieldDescriptionSupply(JTextArea textFieldDescriptionSupply) {
+        this.textFieldDescriptionSupply = textFieldDescriptionSupply;
     }
 
     public JButton getButtonAddList() {

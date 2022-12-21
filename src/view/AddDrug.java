@@ -10,10 +10,9 @@ public class AddDrug implements ActionListener {
     private JFrame frame;
     private JPanel panelForm;
     private JPanel panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
-    private JLabel labelDateVisit, labelName, labelCoC, labelDrug, labelDose, labelSupply, labelSupplyAmount;
-    private JTextField textFieldName, textFieldDrugDose, textFieldSupply;
-    private JTextArea textFieldCoC;
-    private JComboBox checkBoxDrug, checkBoxSuppl;
+    private JLabel labelDateVisit, labelName, labelDescription, labelSideEffects, labelDose, labelStorage;
+    private JTextField textFieldName, textFieldDrugDose, textFieldSideEffects, textFieldStorage;
+    private JTextArea textFieldDescription;
     private JButton buttonAddList, buttonCancel;
 
     public AddDrug() {
@@ -29,18 +28,16 @@ public class AddDrug implements ActionListener {
         panelButton = new JPanel();
         labelDateVisit = new JLabel("Date of Visit");
         labelName = new JLabel("Name");
-        labelCoC = new JLabel("Cheif of Complain");
-        labelDrug = new JLabel("Drug");
-        labelDose = new JLabel("Drug Dose");
-        labelSupply = new JLabel("Supply");
-        labelSupplyAmount = new JLabel("Supply Amount");
+        labelDescription = new JLabel("Description");
+        labelSideEffects = new JLabel("SideEffects");
+        labelDose = new JLabel("Dosage");
+        labelStorage = new JLabel("Storage");
         textFieldName = new JTextField(20);
-        textFieldCoC = new JTextArea(3, 20);
+        textFieldStorage = new JTextField(20);
+        textFieldSideEffects = new JTextField();
+        textFieldDescription = new JTextArea(3, 20);
         textFieldDrugDose = new JTextField(20);
-        textFieldSupply = new JTextField(20);
-        checkBoxDrug = new JComboBox();
-        checkBoxSuppl = new JComboBox();
-        buttonAddList = new JButton("Add Patient");
+        buttonAddList = new JButton("Add Drug");
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
@@ -50,7 +47,6 @@ public class AddDrug implements ActionListener {
         panelDrug.setLayout(new GridLayout(2, 1));
         panelDrugDose.setLayout(new GridLayout(2, 1));
         panelSupply.setLayout(new GridLayout(2, 1));
-        panelSupplyAmount.setLayout(new GridLayout(2, 1));
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         // Set Style
@@ -65,16 +61,14 @@ public class AddDrug implements ActionListener {
         // Add Components
         panelName.add(labelName);
         panelName.add(textFieldName);
-        panelCoC.add(labelCoC);
-        panelCoC.add(textFieldCoC);
-        panelDrug.add(labelDrug);
-        panelDrug.add(checkBoxDrug);
+        panelCoC.add(labelDescription);
+        panelCoC.add(textFieldDescription);
+        panelDrug.add(labelSideEffects);
+        panelDrug.add(textFieldSideEffects);
         panelDrugDose.add(labelDose);
         panelDrugDose.add(textFieldDrugDose);
-        panelSupply.add(labelSupply);
-        panelSupply.add(checkBoxSuppl);
-        panelSupplyAmount.add(labelSupplyAmount);
-        panelSupplyAmount.add(textFieldSupply);
+        panelSupply.add(labelStorage);
+        panelSupply.add(textFieldStorage);
         panelButton.add(buttonCancel);
         panelButton.add(buttonAddList);
         panelForm.add(panelName);
@@ -99,6 +93,46 @@ public class AddDrug implements ActionListener {
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
         }
+    }
+
+    public JTextField getTextFieldName() {
+        return textFieldName;
+    }
+
+    public void setTextFieldName(JTextField textFieldName) {
+        this.textFieldName = textFieldName;
+    }
+
+    public JTextField getTextFieldDrugDose() {
+        return textFieldDrugDose;
+    }
+
+    public void setTextFieldDrugDose(JTextField textFieldDrugDose) {
+        this.textFieldDrugDose = textFieldDrugDose;
+    }
+
+    public JTextField getTextFieldSideEffects() {
+        return textFieldSideEffects;
+    }
+
+    public void setTextFieldSideEffects(JTextField textFieldSideEffects) {
+        this.textFieldSideEffects = textFieldSideEffects;
+    }
+
+    public JTextField getTextFieldStorage() {
+        return textFieldStorage;
+    }
+
+    public void setTextFieldStorage(JTextField textFieldStorage) {
+        this.textFieldStorage = textFieldStorage;
+    }
+
+    public JTextArea getTextFieldDescription() {
+        return textFieldDescription;
+    }
+
+    public void setTextFieldDescription(JTextArea textFieldDescription) {
+        this.textFieldDescription = textFieldDescription;
     }
 
     public JButton getButtonAddList() {

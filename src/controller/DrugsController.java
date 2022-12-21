@@ -1,6 +1,9 @@
 
 package controller;
 
+import view.AddDrug;
+import view.AddList;
+
 import java.awt.event.*;
 
 import javax.swing.event.ListSelectionEvent;
@@ -14,7 +17,7 @@ public class DrugsController implements ActionListener, ListSelectionListener {
 
   public void actionPerformed(ActionEvent e) {
     if (e.getActionCommand() == "Add") {
-      System.out.println("Add Drug");
+      AddDrug addDrug = new AddDrug();
     } else if (e.getActionCommand() == "Delete") {
       System.out.println("Delete Drug");
     }
