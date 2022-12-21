@@ -21,7 +21,7 @@ public class SignUpController {
         statement.execute();
         JOptionPane.showMessageDialog(SignIn.frame, "You're Sign Up success. Let go to Sign in.", "Success!", JOptionPane.INFORMATION_MESSAGE);
       } catch (SQLException e) {
-        System.out.println("Error inserting user into database: " + e);
+        JOptionPane.showMessageDialog(SignIn.frame, "You're Sign Up fail. Please import primary_care_hospital.sql before using thisapplication.", "Error!", JOptionPane.ERROR_MESSAGE);
       }
 
     } catch (SQLException e) {
