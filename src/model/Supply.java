@@ -4,13 +4,13 @@ public class Supply {
 
   private String name;
   private String description;
-  private String storage;
+  private int storage;
 
   public Supply() {
-    this("", "", "");
+    this("", "", 0);
   }
 
-  public Supply(String name, String description, String storage) {
+  public Supply(String name, String description, int storage) {
     this.name = name;
     this.description = description;
     this.storage = storage;
@@ -24,7 +24,7 @@ public class Supply {
     return description;
   }
 
-  public String getStorage() {
+  public int getStorage() {
     return storage;
   }
 

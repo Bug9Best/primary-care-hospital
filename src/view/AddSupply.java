@@ -1,11 +1,14 @@
 package view;
 
+import model.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class AddSupply implements ActionListener {
-
     // Declare Attributes
     private JFrame frame;
     private JPanel panelForm;
@@ -14,6 +17,8 @@ public class AddSupply implements ActionListener {
     private JTextField textFieldNameSupply, textFieldStorageSupply;
     private JTextArea textFieldDescription;
     private JButton buttonAddList, buttonCancel;
+    private Supply supply;
+    private SupplyModel supplyModel;
 
     public AddSupply() {
         // Create Objects
@@ -29,7 +34,7 @@ public class AddSupply implements ActionListener {
         textFieldNameSupply = new JTextField(20);
         textFieldStorageSupply = new JTextField(20);
         textFieldDescription = new JTextArea(3, 20);
-        buttonAddList = new JButton("Add Drug");
+        buttonAddList = new JButton("Add Supply");
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
@@ -73,21 +78,47 @@ public class AddSupply implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonAddList) {
-            System.out.println("Add List");
+            supply = new Supply(getTextFieldNameSupplyValue(), getTextFieldDescriptionValue(), getTextFieldStorageSupplyValue());
+            AddSupplyDB(supply);
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
         }
     }
 
-    public JTextField getTextFieldNameSupply() {
-        return textFieldNameSupply;
+    public void AddSupplyDB(Supply supply) {
+        String sql = "INSERT INTO supplies (name, description, storage) VALUES (?, ?, ?)";
+        try (Connection con = ConnnectDB.ConnectDB()) {
+    
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
+                con.prepareStatement(sql);
+                statement.setString(1, supply.getName());
+                statement.setString(2, supply.getDescription());
+                statement.setInt(3, supply.getStorage());
+                statement.execute();
+                System.out.println("Add to DB Successfully");
+                getFrame().dispose();
+            } catch (SQLException e) {
+                System.out.println("Add to DB Failed");
+            }
+    
+        } catch (SQLException e) {
+            System.out.println("Connect Failed!!!");
+        }
     }
 
-    public JTextField getTextFieldStorageSupply() {
-        return textFieldStorageSupply;
+    public JFrame getFrame() {
+        return frame;
     }
 
-    public JTextArea getTextFieldDescription() {
-        return textFieldDescription;
+    public String getTextFieldNameSupplyValue() {
+        return textFieldNameSupply.getText();
+    }
+
+    public String getTextFieldDescriptionValue() {
+        return textFieldDescription.getText();
+    }
+
+    public int getTextFieldStorageSupplyValue() {
+        return Integer.parseInt(textFieldStorageSupply.getText());
     }
 }
