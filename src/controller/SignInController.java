@@ -49,7 +49,7 @@ public class SignInController implements ActionListener {
 
   public void resetField() {
     signup.getTextFieldName().setText("");
-    signup.getTextFieldRoll().setText("");
+    signup.getTextFieldRoll().setSelectedIndex(0);
     signup.getTextFieldUsername().setText("");
     signup.getTextFieldPassword().setText("");
   }

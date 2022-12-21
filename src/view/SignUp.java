@@ -7,7 +7,8 @@ public class SignUp extends JPanel {
     // Declare Attributes
     private JPanel panelImg, panelForm, form, panelText, panelButton;
     private JLabel img, labelName, labelRoll, labelUsername, labelPassword;
-    private JTextField textFieldName, textFieldRoll, textFieldUsername;
+    private JTextField textFieldName, textFieldUsername;
+    private JComboBox<String> comboBoxRoll;
     private JPasswordField textFieldPassword;
     private JButton buttonSignUp, buttonCancel;
 
@@ -24,7 +25,7 @@ public class SignUp extends JPanel {
         labelUsername = new JLabel("Username");
         labelPassword = new JLabel("Password");
         textFieldName = new JTextField(40);
-        textFieldRoll = new JTextField(40);
+        comboBoxRoll = new JComboBox<String>(new String[] { "Doctor", "Pharmacist", "Registered Nurse", "Technical Nurse", "Nursing Assistant" });
         textFieldUsername = new JTextField(40);
         textFieldPassword = new JPasswordField(40);
         buttonSignUp = new JButton("Confirm");
@@ -53,7 +54,7 @@ public class SignUp extends JPanel {
         panelText.add(labelName);
         panelText.add(textFieldName);
         panelText.add(labelRoll);
-        panelText.add(textFieldRoll);
+        panelText.add(comboBoxRoll);
         panelText.add(labelUsername);
         panelText.add(textFieldUsername);
         panelText.add(labelPassword);
@@ -80,8 +81,8 @@ public class SignUp extends JPanel {
         return textFieldName;
     }
 
-    public JTextField getTextFieldRoll() {
-        return textFieldRoll;
+    public JComboBox<String> getTextFieldRoll() {
+        return comboBoxRoll;
     }
 
     public JTextField getTextFieldUsername() {
@@ -97,7 +98,7 @@ public class SignUp extends JPanel {
     }
 
     public String getTextFieldRollValue() {
-        return textFieldRoll.getText();
+        return comboBoxRoll.getSelectedItem().toString();
     }
 
     public String getTextFieldUsernameValue() {
