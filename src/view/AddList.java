@@ -88,6 +88,7 @@ public class AddList implements ActionListener {
 
         // Frame Configurations
         frame.setSize(600, 400);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
