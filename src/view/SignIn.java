@@ -92,11 +92,19 @@ public class SignIn {
     return buttonRegister;
   }
 
-  public String getTextFieldUsername() {
+  public JTextField getTextFieldUsername() {
+    return textFieldUsername;
+  }
+
+  public JPasswordField getTextFieldPassword() {
+    return textFieldPassword;
+  }
+
+  public String getTextFieldUsernameValue() {
     return textFieldUsername.getText();
   }
 
-  public String getTextFieldPassword() {
+  public String getTextFieldPasswordValue() {
     String value = "";
     for (int i = 0; i < textFieldPassword.getPassword().length; i++) {
       value += textFieldPassword.getPassword()[i];
