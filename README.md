@@ -10,11 +10,13 @@
   
   1. [JDK](https://www.oracle.com/java/technologies/downloads/)(Java)
   2. [Editor](https://code.visualstudio.com/Download)  In reality You can use another editor. but in this project use mainly VS code
+  3. XPAM
 
 ## Versioning
  
   ***1. JDK (java)*** Version 18 <br>
   ***2. Vscode*** Version 1.74
+  ***3. XPAM (For now)***
 
 ## Project creator team
   
