@@ -19,6 +19,7 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
   private Drugs drugs = new Drugs();
   private Supplies supplies = new Supplies();
   private Settings settings = new Settings();
+  private SignInController SignInController;
   private ListsController ListsController = new ListsController();
   private DrugsController DrugsController = new DrugsController();
   private SuppliesController SuppliesController = new SuppliesController();
@@ -32,6 +33,7 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
     home.getitemAbout().addActionListener(this);
     home.getItemExit().addActionListener(this);
     home.getManageTree().addTreeSelectionListener(this);
+    home.getButtonSignOut().addActionListener(this);
 
     lists.getBtnAdd().addActionListener(ListsController);
     lists.getBtnDelete().addActionListener(ListsController);
@@ -58,6 +60,9 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
       }
     } else if (e.getSource() == home.getItemExit()) {
       System.exit(0);
+    } else if (e.getSource() == home.getButtonSignOut()) {
+      home.getFrame().dispose();
+      new SignInController();
     }
   }
 

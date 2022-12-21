@@ -17,8 +17,7 @@ public class Home {
   private JMenu file;
   private JMenuItem itemAbout, itemExit;
   private JLabel labelName, labelRole;
-
-  private JButton bottonSignOut;
+  private JButton buttonSignOut;
 
   public Home() {
     // Create Objects
@@ -31,7 +30,7 @@ public class Home {
     panelSignOut = new JPanel();
     labelName = new JLabel("");
     labelRole = new JLabel("");
-    bottonSignOut = new JButton("Sign Out");
+    buttonSignOut = new JButton("Sign Out");
     menuBar = new JMenuBar();
     file = new JMenu("File");
     itemAbout = new JMenuItem("About this Program");
@@ -71,7 +70,7 @@ public class Home {
 
     panelName.add(labelName);
     panelRoll.add(labelRole);
-    panelSignOut.add(bottonSignOut);
+    panelSignOut.add(buttonSignOut);
 
     pagePanel.add(panelName);
     pagePanel.add(panelRoll);
@@ -132,6 +131,10 @@ public class Home {
 
   public JMenuItem getitemAbout() {
     return itemAbout;
+  }
+
+  public JButton getButtonSignOut() {
+    return buttonSignOut;
   }
 
   public DefaultMutableTreeNode getList() {
