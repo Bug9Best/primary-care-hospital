@@ -9,8 +9,8 @@ public class AddDrug implements ActionListener {
     // Declare Attributes
     private JFrame frame;
     private JPanel panelForm;
-    private JPanel panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
-    private JLabel labelDateVisit, labelName, labelDescription, labelSideEffects, labelDose, labelStorage;
+    private JPanel panelName, panelDescription, panelSideEffects, panelDose, panelStorage, panelButton;
+    private JLabel labelName, labelDescription, labelSideEffects, labelDose, labelStorage;
     private JTextField textFieldName, textFieldDrugDose, textFieldSideEffects, textFieldStorage;
     private JTextArea textFieldDescription;
     private JButton buttonAddList, buttonCancel;
@@ -20,13 +20,11 @@ public class AddDrug implements ActionListener {
         frame = new JFrame("Add List");
         panelForm = new JPanel();
         panelName = new JPanel();
-        panelCoC = new JPanel();
-        panelDrug = new JPanel();
-        panelDrugDose = new JPanel();
-        panelSupply = new JPanel();
-        panelSupplyAmount = new JPanel();
+        panelDescription = new JPanel();
+        panelSideEffects = new JPanel();
+        panelDose = new JPanel();
+        panelStorage = new JPanel();
         panelButton = new JPanel();
-        labelDateVisit = new JLabel("Date of Visit");
         labelName = new JLabel("Name");
         labelDescription = new JLabel("Description");
         labelSideEffects = new JLabel("SideEffects");
@@ -43,10 +41,10 @@ public class AddDrug implements ActionListener {
         // Set Layout
         panelForm.setLayout(new GridLayout(7, 1));
         panelName.setLayout(new GridLayout(2, 1));
-        panelCoC.setLayout(new GridLayout(2, 1));
-        panelDrug.setLayout(new GridLayout(2, 1));
-        panelDrugDose.setLayout(new GridLayout(2, 1));
-        panelSupply.setLayout(new GridLayout(2, 1));
+        panelDescription.setLayout(new GridLayout(2, 1));
+        panelSideEffects.setLayout(new GridLayout(2, 1));
+        panelDose.setLayout(new GridLayout(2, 1));
+        panelStorage.setLayout(new GridLayout(2, 1));
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         // Set Style
@@ -61,22 +59,21 @@ public class AddDrug implements ActionListener {
         // Add Components
         panelName.add(labelName);
         panelName.add(textFieldName);
-        panelCoC.add(labelDescription);
-        panelCoC.add(textFieldDescription);
-        panelDrug.add(labelSideEffects);
-        panelDrug.add(textFieldSideEffects);
-        panelDrugDose.add(labelDose);
-        panelDrugDose.add(textFieldDrugDose);
-        panelSupply.add(labelStorage);
-        panelSupply.add(textFieldStorage);
+        panelDescription.add(labelDescription);
+        panelDescription.add(textFieldDescription);
+        panelSideEffects.add(labelSideEffects);
+        panelSideEffects.add(textFieldSideEffects);
+        panelDose.add(labelDose);
+        panelDose.add(textFieldDrugDose);
+        panelStorage.add(labelStorage);
+        panelStorage.add(textFieldStorage);
         panelButton.add(buttonCancel);
         panelButton.add(buttonAddList);
         panelForm.add(panelName);
-        panelForm.add(panelCoC);
-        panelForm.add(panelDrug);
-        panelForm.add(panelDrugDose);
-        panelForm.add(panelSupply);
-        panelForm.add(panelSupplyAmount);
+        panelForm.add(panelDescription);
+        panelForm.add(panelSideEffects);
+        panelForm.add(panelDose);
+        panelForm.add(panelStorage);
         panelForm.add(panelButton);
         frame.add(panelForm);
 
@@ -142,5 +139,9 @@ public class AddDrug implements ActionListener {
 
     public JButton getButtonCancel() {
         return buttonCancel;
+    }
+
+    public static void main(String[] args) {
+        new AddDrug();
     }
 }

@@ -19,7 +19,6 @@ public class HomeController implements ActionListener, TreeSelectionListener {
   private Supplies supplies = new Supplies();
   private Settings settings = new Settings();
   private ListsController ListsController = new ListsController();
-  private AddListController AddListController = new AddListController();
   private DrugsController DrugsController = new DrugsController();
   private SuppliesController SuppliesController = new SuppliesController();
 

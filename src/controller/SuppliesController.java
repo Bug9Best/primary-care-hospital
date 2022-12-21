@@ -1,10 +1,7 @@
 package controller;
 
-import view.AddDrug;
-import view.AddSupply;
-
 import java.awt.event.*;
-
+import view.AddSupply;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 

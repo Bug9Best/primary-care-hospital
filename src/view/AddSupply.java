@@ -9,10 +9,10 @@ public class AddSupply implements ActionListener {
     // Declare Attributes
     private JFrame frame;
     private JPanel panelForm;
-    private JPanel panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
-    private JLabel labelNameSupply, labelDescriptionSupply, labelStorageSupply;
+    private JPanel panelName, panelDescription, panelStorage, panelButton;
+    private JLabel labelNameSupply, labelDescription, labelStorage;
     private JTextField textFieldNameSupply, textFieldStorageSupply;
-    private JTextArea textFieldDescriptionSupply;
+    private JTextArea textFieldDescription;
     private JButton buttonAddList, buttonCancel;
 
     public AddSupply() {
@@ -20,28 +20,23 @@ public class AddSupply implements ActionListener {
         frame = new JFrame("Add List");
         panelForm = new JPanel();
         panelName = new JPanel();
-        panelCoC = new JPanel();
-        panelDrug = new JPanel();
-        panelDrugDose = new JPanel();
-        panelSupply = new JPanel();
-        panelSupplyAmount = new JPanel();
+        panelDescription = new JPanel();
+        panelStorage = new JPanel();
         panelButton = new JPanel();
         labelNameSupply = new JLabel("Name");
-        labelDescriptionSupply = new JLabel("Description");
-        labelStorageSupply = new JLabel("Storage");
+        labelDescription = new JLabel("Description");
+        labelStorage = new JLabel("Storage");
         textFieldNameSupply = new JTextField(20);
         textFieldStorageSupply = new JTextField(20);
-        textFieldDescriptionSupply = new JTextArea(3, 20);
+        textFieldDescription = new JTextArea(3, 20);
         buttonAddList = new JButton("Add Drug");
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
         panelForm.setLayout(new GridLayout(7, 1));
         panelName.setLayout(new GridLayout(2, 1));
-        panelCoC.setLayout(new GridLayout(2, 1));
-        panelDrug.setLayout(new GridLayout(2, 1));
-        panelDrugDose.setLayout(new GridLayout(2, 1));
-        panelSupply.setLayout(new GridLayout(2, 1));
+        panelDescription.setLayout(new GridLayout(2, 1));
+        panelStorage.setLayout(new GridLayout(2, 1));
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         // Set Style
@@ -56,18 +51,15 @@ public class AddSupply implements ActionListener {
         // Add Components
         panelName.add(labelNameSupply);
         panelName.add(textFieldNameSupply);
-        panelCoC.add(labelDescriptionSupply);
-        panelCoC.add(textFieldDescriptionSupply);
-        panelSupply.add(labelStorageSupply);
-        panelSupply.add(textFieldStorageSupply);
+        panelDescription.add(labelDescription);
+        panelDescription.add(textFieldDescription);
+        panelStorage.add(labelStorage);
+        panelStorage.add(textFieldStorageSupply);
         panelButton.add(buttonCancel);
         panelButton.add(buttonAddList);
         panelForm.add(panelName);
-        panelForm.add(panelCoC);
-        //panelForm.add(panelDrug);
-        //panelForm.add(panelDrugDose);
-        panelForm.add(panelSupply);
-        //panelForm.add(panelSupplyAmount);
+        panelForm.add(panelDescription);
+        panelForm.add(panelStorage);
         panelForm.add(panelButton);
         frame.add(panelForm);
 
@@ -91,31 +83,11 @@ public class AddSupply implements ActionListener {
         return textFieldNameSupply;
     }
 
-    public void setTextFieldNameSupply(JTextField textFieldNameSupply) {
-        this.textFieldNameSupply = textFieldNameSupply;
-    }
-
     public JTextField getTextFieldStorageSupply() {
         return textFieldStorageSupply;
     }
 
-    public void setTextFieldStorageSupply(JTextField textFieldStorageSupply) {
-        this.textFieldStorageSupply = textFieldStorageSupply;
-    }
-
-    public JTextArea getTextFieldDescriptionSupply() {
-        return textFieldDescriptionSupply;
-    }
-
-    public void setTextFieldDescriptionSupply(JTextArea textFieldDescriptionSupply) {
-        this.textFieldDescriptionSupply = textFieldDescriptionSupply;
-    }
-
-    public JButton getButtonAddList() {
-        return buttonAddList;
-    }
-
-    public JButton getButtonCancel() {
-        return buttonCancel;
+    public JTextArea getTextFieldDescription() {
+        return textFieldDescription;
     }
 }
