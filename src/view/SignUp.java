@@ -76,4 +76,39 @@ public class SignUp extends JPanel {
         return buttonCancel;
     }
 
+    public JTextField getTextFieldName() {
+        return textFieldName;
+    }
+
+    public JTextField getTextFieldRoll() {
+        return textFieldRoll;
+    }
+
+    public JTextField getTextFieldUsername() {
+        return textFieldUsername;
+    }
+
+    public JPasswordField getTextFieldPassword() {
+        return textFieldPassword;
+    }
+
+    public String getTextFieldNameValue() {
+        return textFieldName.getText();
+    }
+
+    public String getTextFieldRollValue() {
+        return textFieldRoll.getText();
+    }
+
+    public String getTextFieldUsernameValue() {
+        return textFieldUsername.getText();
+    }
+
+    public String getTextFieldPasswordValue() {
+        String value = "";
+        for (int i = 0; i < textFieldPassword.getPassword().length; i++) {
+            value += textFieldPassword.getPassword()[i];
+        }
+        return value;
+    }
 }

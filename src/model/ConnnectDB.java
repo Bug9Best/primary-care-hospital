@@ -1,18 +1,22 @@
 package model;
 
 import java.sql.*;
+
+import javax.swing.JOptionPane;
+import view.SignIn;
+
 public class ConnnectDB {
-    public static void ConnectDB() {
+    public static Connection ConnectDB() {
+        String url = "jdbc:mysql://localhost/primary_care_hospital";
+        String username = "root";
+        String password = "";
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            String url = "jdbc:mysql://localhost/waido_db";
-            DriverManager.getConnection(url, "root", "");
-            System.out.println("Connect Suuccess!!!");
+            Connection con = DriverManager.getConnection(url, username, password);
+            return con;
         } catch (SQLException e) {
-            System.out.println("Connect Failed!!!");
-            System.exit(0);
-        } catch (ClassNotFoundException ex) {
-            System.out.println("Please Install Driver");
+             JOptionPane.showMessageDialog(SignIn.frame, "You're not connect to database.Please open MySQL and Import primary_care_hospital.sql before using thisapplication.", "Error!", JOptionPane.ERROR_MESSAGE);
+             System.exit(0);
         }
+        return null;
     }
 }

@@ -5,11 +5,11 @@ import java.awt.*;
 
 public class SignIn {
   // Declare Attributes
-  private JFrame frame;
+  public static JFrame frame;
   private JPanel panelMain, panelSignin, panelImg, panelForm, form, panelText, panelButton;
   private JLabel img, labelUsername, labelPassword;
   private JTextField textFieldUsername;
-  private JPasswordField texFieldPassword;
+  private JPasswordField textFieldPassword;
   private JButton buttonLogin, buttonRegister;
 
   public SignIn() {
@@ -26,7 +26,7 @@ public class SignIn {
     labelUsername = new JLabel("Username");
     labelPassword = new JLabel("Password");
     textFieldUsername = new JTextField(40);
-    texFieldPassword = new JPasswordField(40);
+    textFieldPassword = new JPasswordField(40);
     buttonLogin = new JButton("Login");
     buttonRegister = new JButton("Register");
 
@@ -53,7 +53,7 @@ public class SignIn {
     panelText.add(labelUsername);
     panelText.add(textFieldUsername);
     panelText.add(labelPassword);
-    panelText.add(texFieldPassword);
+    panelText.add(textFieldPassword);
     panelButton.add(buttonLogin);
     panelButton.add(buttonRegister);
     form.add(panelText);
@@ -91,4 +91,17 @@ public class SignIn {
   public JButton getButtonRegister() {
     return buttonRegister;
   }
+
+  public String getTextFieldUsername() {
+    return textFieldUsername.getText();
+  }
+
+  public String getTextFieldPassword() {
+    String value = "";
+    for (int i = 0; i < textFieldPassword.getPassword().length; i++) {
+      value += textFieldPassword.getPassword()[i];
+    }
+    return value;
+  }
+
 }
