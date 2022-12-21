@@ -1,13 +1,16 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class Supplies extends JPanel {
+public class Supplies extends JPanel implements ActionListener, ListSelectionListener {
   // Declare Attributes
   private JPanel panelAction, panelButton, panelTable;
   private JLabel labelTitle;
-  private JButton btnAdd, btnDelete;
+  private JButton btnAdd;
   private JTable supplyTable;
 
   String data[][] = {};
@@ -20,32 +23,32 @@ public class Supplies extends JPanel {
     panelButton = new JPanel();
     labelTitle = new JLabel("Supplies List");
     btnAdd = new JButton("Add");
-    btnDelete = new JButton("Delete");
-   supplyTable = new JTable(data, header){
+    supplyTable = new JTable(data, header) {
       public boolean isCellEditable(int row, int column) {
         return false;
       }
-   };
-    JScrollPane acrollPaneTable = new JScrollPane (supplyTable);
+    };
+    JScrollPane acrollPaneTable = new JScrollPane(supplyTable);
 
-    // Set Layout 
+    // Set Layout
     this.setLayout(new BorderLayout());
     panelAction.setLayout(new BorderLayout());
     panelTable.setLayout(new GridLayout(1, 1));
 
     // Conponent Configuration
     labelTitle.setFont(new Font("InaiMathi", Font.BOLD, 24));
-    btnAdd.setPreferredSize(new Dimension(100,30));
-    btnDelete.setPreferredSize(new Dimension(100,30));
-    
+    btnAdd.setPreferredSize(new Dimension(200, 30));
 
     // Table Configuration
-   supplyTable.getTableHeader().setReorderingAllowed(false);
-   supplyTable.setRowHeight(30);
+    supplyTable.getTableHeader().setReorderingAllowed(false);
+    supplyTable.setRowHeight(30);
+
+    // Add Action Listener
+    btnAdd.addActionListener(this); 
+    supplyTable.getSelectionModel().addListSelectionListener(this);
 
     // Add Components
     panelButton.add(btnAdd);
-    panelButton.add(btnDelete);
     panelAction.add(labelTitle, BorderLayout.WEST);
     panelAction.add(panelButton, BorderLayout.EAST);
     panelTable.add(acrollPaneTable);
@@ -57,13 +60,22 @@ public class Supplies extends JPanel {
     this.setVisible(true);
   }
 
+  @Override
+  public void valueChanged(ListSelectionEvent e) {
+
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getActionCommand() == "Add") {
+      new AddSupply();
+    }
+  }
+
   public JButton getBtnAdd() {
     return btnAdd;
   }
 
-  public JButton getBtnDelete() {
-    return btnDelete;
-  }
   public JTable getSupplyTable() {
     return supplyTable;
   }

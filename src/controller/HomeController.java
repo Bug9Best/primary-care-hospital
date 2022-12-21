@@ -15,14 +15,6 @@ import java.net.URISyntaxException;
 
 public class HomeController implements ActionListener, TreeSelectionListener, WindowListener {
   private Home home = new Home();
-  private Lists lists = new Lists();
-  private Drugs drugs = new Drugs();
-  private Supplies supplies = new Supplies();
-  private Settings settings = new Settings();
-  private ListsController ListsController = new ListsController();
-  private DrugsController DrugsController = new DrugsController();
-  private SuppliesController SuppliesController = new SuppliesController();
-  private User user;
   private UserModel userModel;
 
   public HomeController(UserModel userModel) {
@@ -33,18 +25,6 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
     home.getItemExit().addActionListener(this);
     home.getManageTree().addTreeSelectionListener(this);
     home.getButtonSignOut().addActionListener(this);
-
-    lists.getBtnAdd().addActionListener(ListsController);
-    lists.getBtnDelete().addActionListener(ListsController);
-    lists.getListTable().getSelectionModel().addListSelectionListener(ListsController);
-
-    drugs.getBtnAdd().addActionListener(DrugsController);
-    drugs.getBtnDelete().addActionListener(DrugsController);
-    drugs.getDrugTable().getSelectionModel().addListSelectionListener(DrugsController);
-
-    supplies.getBtnAdd().addActionListener(SuppliesController);
-    supplies.getBtnDelete().addActionListener(SuppliesController);
-    supplies.getSupplyTable().getSelectionModel().addListSelectionListener(SuppliesController);
   }
 
   @Override
@@ -71,13 +51,13 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
       DefaultMutableTreeNode node = (DefaultMutableTreeNode) home.getManageTree().getLastSelectedPathComponent();
       if (node.isLeaf()) {
         if (node == home.getList()) {
-          this.changeContent(lists);
+          this.changeContent(new Lists());
         } else if (node == home.getDrug()) {
-          this.changeContent(drugs);
+          this.changeContent(new Drugs());
         } else if (node == home.getSupply()) {
-          this.changeContent(supplies);
+          this.changeContent(new Supplies());
         } else if (node == home.getSetting()) {
-          this.changeContent(settings);
+          this.changeContent(new Settings(userModel));
         }
       } else {
         return;
@@ -96,8 +76,6 @@ public class HomeController implements ActionListener, TreeSelectionListener, Wi
   public void windowOpened(WindowEvent e) {
     home.getLabelName().setText(userModel.getUser().getName());
     home.getLabelRole().setText(userModel.getUser().getRole());
-    settings.getTextFieldName().setText(userModel.getUser().getName());
-    settings.getTextFieldRole().setText(userModel.getUser().getRole());
   }
 
   @Override

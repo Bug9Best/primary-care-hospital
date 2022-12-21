@@ -2,13 +2,17 @@ package view;
 
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class Lists extends JPanel {
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+public class Lists extends JPanel implements ActionListener, ListSelectionListener {
 
   // Declare Attributes
   private JPanel panelAction, panelButton, panelTable;
   private JLabel labelTitle;
-  private JButton btnAdd, btnDelete;
+  private JButton btnAdd;
   private JTable listTable;
 
   String data[][] = {};
@@ -21,7 +25,6 @@ public class Lists extends JPanel {
     panelButton = new JPanel();
     labelTitle = new JLabel("Patients List");
     btnAdd = new JButton("Add");
-    btnDelete = new JButton("Delete");
     listTable = new JTable(data, header) {
       public boolean isCellEditable(int row, int column) {
         return false;
@@ -34,19 +37,21 @@ public class Lists extends JPanel {
     panelAction.setLayout(new BorderLayout());
     panelTable.setLayout(new GridLayout(1, 1));
 
-    // Conponent Configuration
+    // Set Style
     labelTitle.setFont(new Font("InaiMathi", Font.BOLD, 24));
-    btnAdd.setPreferredSize(new Dimension(100, 30));
-    btnDelete.setPreferredSize(new Dimension(100, 30));
+    btnAdd.setPreferredSize(new Dimension(200, 30));
 
     // Table Configuration
     listTable.getTableHeader().setReorderingAllowed(false);
     listTable.setRowHeight(30);
     // listTable.getColumnModel().getColumn(0).setPreferredWidth(50);
 
+    // Add Action Listener
+    btnAdd.addActionListener(this);
+    listTable.getSelectionModel().addListSelectionListener(this);
+
     // Add Components
     panelButton.add(btnAdd);
-    panelButton.add(btnDelete);
     panelAction.add(labelTitle, BorderLayout.WEST);
     panelAction.add(panelButton, BorderLayout.EAST);
     panelTable.add(acrollPaneTable);
@@ -58,16 +63,15 @@ public class Lists extends JPanel {
     this.setVisible(true);
   }
 
-  public JTable getListTable() {
-    return listTable;
+  @Override
+  public void valueChanged(ListSelectionEvent e) {
+    System.out.println("Selected List");
   }
 
-  public JButton getBtnAdd() {
-    return btnAdd;
+  @Override
+  public void actionPerformed(ActionEvent e) {
+    if (e.getActionCommand() == "Add") {
+      new AddList();
+    }
   }
-
-  public JButton getBtnDelete() {
-    return btnDelete;
-  }
-
 }

@@ -3,6 +3,8 @@ package view;
 import java.awt.*;
 import javax.swing.*;
 
+import model.UserModel;
+
 public class Settings extends JPanel {
   // Declare Attributes
   private JPanel panelForm, panelButton;
@@ -10,8 +12,9 @@ public class Settings extends JPanel {
   private JTextField textFieldName, textFieldRole;
   private JPasswordField textFieldOldPassword, textFieldPassword;
   private JButton buttonConfirm;
+  private UserModel userModel;
 
-  public Settings() {
+  public Settings(UserModel userModel) {
     // Create Objects
     panelForm = new JPanel();
     panelButton = new JPanel();
@@ -55,6 +58,10 @@ public class Settings extends JPanel {
     // Panel Settings
     setPreferredSize(new Dimension(850, 720));
     setVisible(true);
+
+    // Set Default Value
+    textFieldName.setText(userModel.getUser().getName());
+    textFieldRole.setText(userModel.getUser().getRole());
   }
 
   public JTextField getTextFieldName() {
@@ -64,4 +71,33 @@ public class Settings extends JPanel {
   public JTextField getTextFieldRole() {
     return textFieldRole;
   }
+
+  public JButton getButtonConfirm() {
+    return buttonConfirm;
+  }
+
+  public JPasswordField getTextFieldOldPassword() {
+    return textFieldOldPassword;
+  }
+
+  public JPasswordField getTextFieldPassword() {
+    return textFieldPassword;
+  }
+
+  public String getTextFieldOldPasswordValue() {
+    String value = "";
+    for (int i = 0; i < textFieldOldPassword.getPassword().length; i++) {
+      value += textFieldOldPassword.getPassword()[i];
+    }
+    return value;
+  }
+
+  public String getTextFieldPasswordValue() {
+    String value = "";
+    for (int i = 0; i < textFieldPassword.getPassword().length; i++) {
+      value += textFieldPassword.getPassword()[i];
+    }
+    return value;
+  }
+
 }
