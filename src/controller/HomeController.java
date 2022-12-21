@@ -15,10 +15,12 @@ import java.net.URISyntaxException;
 public class HomeController implements ActionListener, TreeSelectionListener {
   private Home home = new Home();
   private Lists lists = new Lists();
+  private AddList addList = new AddList();
   private Drugs drugs = new Drugs();
   private Supplies supplies = new Supplies();
   private Settings settings = new Settings();
   private ListsController ListsController = new ListsController();
+  private AddListController AddListController = new AddListController();
   private DrugsController DrugsController = new DrugsController();
   private SuppliesController SuppliesController = new SuppliesController();
 
