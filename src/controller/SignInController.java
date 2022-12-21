@@ -27,16 +27,14 @@ public class SignInController implements ActionListener {
 
   public void actionPerformed(ActionEvent e) {
     if (e.getSource() == signIn.getButtonLogin()) {
-      new HomeController();
-      signIn.getFrame().dispose();
+      Signin(null, null);
     } else if (e.getSource() == signIn.getButtonRegister()) {
       this.changeContent(signup);
     } else if (e.getSource() == signup.getButtonCancel()) {
       this.changeContent(signIn.getPanelSignin());
     } else if (e.getSource() == signup.getButtonSignUp()) {
       user = new User(signup.getTextFieldNameValue(), signup.getTextFieldRollValue(), signup.getTextFieldUsernameValue(), signup.getTextFieldPasswordValue());
-      userModel = new UserModel(user);
-      signupController.signUp(userModel);
+      signupController.signUp(user);
       resetField();
       this.changeContent(signIn.getPanelSignin());
     }
@@ -63,15 +61,15 @@ public class SignInController implements ActionListener {
 
       try (PreparedStatement statement = con.prepareStatement(sql)) {
         con.prepareStatement(sql);
-        statement.setString(1, userModel.getUser().getName());
-        statement.setString(2, userModel.getUser().getRoll());
+        statement.setString(1, signIn.getTextFieldUsernameValue());
+        statement.setString(2, signIn.getTextFieldPasswordValue());
         statement.executeQuery();
         ResultSet result = statement.executeQuery();
         if (result.next()) {
-          System.out.println("login successful");
-          System.out.println("USERNAME : " + result.getString("Username"));
-          System.out.println("Password : " + result.getString("Password"));
-          // user = new UserModel(result.getString("Username"), result.getString("Password"), result.getInt("Level"));
+          User user = new User(result.getString("username"), result.getString("name"), result.getString("username"), result.getString("Password"));
+          userModel = new UserModel(user);
+          new HomeController();
+          signIn.getFrame().dispose();
           return true;
         } else {
           JOptionPane.showMessageDialog(SignIn.frame, "Your username or password are wrong", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -79,8 +77,6 @@ public class SignInController implements ActionListener {
         }
       }
     } catch (SQLException ex) {
-      // Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null,
-      // ex);
       return false;
     }
   }
