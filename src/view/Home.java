@@ -32,7 +32,7 @@ public class Home {
     labelRole = new JLabel("");
     buttonSignOut = new JButton("Sign Out");
     menuBar = new JMenuBar();
-    file = new JMenu("File");
+    file = new JMenu("About");
     itemAbout = new JMenuItem("About this Program");
     itemExit = new JMenuItem("Exit Program");
     frame.setLayout(new BorderLayout());

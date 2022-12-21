@@ -11,6 +11,9 @@ public class SignIn {
   private JTextField textFieldUsername;
   private JPasswordField textFieldPassword;
   private JButton buttonLogin, buttonRegister;
+  private JMenuBar menuBar;
+  private JMenu file;
+  private JMenuItem itemAbout, itemExit;
 
   public SignIn() {
     // Create Objects
@@ -29,6 +32,10 @@ public class SignIn {
     textFieldPassword = new JPasswordField(40);
     buttonLogin = new JButton("Login");
     buttonRegister = new JButton("Register");
+    menuBar = new JMenuBar();
+    file = new JMenu("About");
+    itemAbout = new JMenuItem("About this Program");
+    itemExit = new JMenuItem("Exit Program");
 
     // Set Layout
     form.setLayout(new GridLayout(2, 1, 0, 20));
@@ -64,6 +71,11 @@ public class SignIn {
     panelSignin.add(panelForm);
     panelMain.add(panelSignin);
     frame.add(panelMain);
+    frame.setJMenuBar(menuBar);
+    file.add(itemAbout);
+    file.addSeparator();
+    file.add(itemExit);
+    menuBar.add(file);
 
     // Frame Configurations
     frame.setResizable(false);
@@ -98,6 +110,14 @@ public class SignIn {
 
   public JPasswordField getTextFieldPassword() {
     return textFieldPassword;
+  }
+
+  public JMenuItem getItemAbout() {
+    return itemAbout;
+  }
+
+  public JMenuItem getItemExit() {
+    return itemExit;
   }
 
   public String getTextFieldUsernameValue() {

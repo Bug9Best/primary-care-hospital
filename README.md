@@ -19,9 +19,9 @@
 
 ## Versioning
  
-  ***1. JDK (java)*** Version 18 <br>
-  ***2. Apache NetBeans*** Version 16 <br>
-  ***3. XAMPP *** (For now. In the future, we will keep the database on the server.)
+  *** 1. JDK (java)*** Version 18 <br>
+  *** 2. Apache NetBeans*** Version 16 <br>
+  *** 3. XAMPP *** (For now. In the future, we will keep the database on the server.)
 
 ## Project creator team
   

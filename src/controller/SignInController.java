@@ -2,12 +2,15 @@ package controller;
 
 import view.*;
 import model.*;
+import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.net.URI;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -23,6 +26,8 @@ public class SignInController implements ActionListener {
     signIn.getButtonRegister().addActionListener(this);
     signup.getButtonSignUp().addActionListener(this);
     signup.getButtonCancel().addActionListener(this);
+    signIn.getItemAbout().addActionListener(this);
+    signIn.getItemExit().addActionListener(this);
   }
 
   public void actionPerformed(ActionEvent e) {
@@ -37,7 +42,17 @@ public class SignInController implements ActionListener {
       signupController.signUp(user);
       resetField();
       this.changeContent(signIn.getPanelSignin());
-    }
+    } else if (e.getSource() == signIn.getItemAbout()) {
+      try {
+        Desktop.getDesktop().browse(new URI("https://github.com/Bug9Best/primary-care-hospital"));
+      } catch (IOException ex) {
+        System.out.println("Error: " + ex.getMessage());
+      } catch (URISyntaxException ex) {
+        System.out.println("Error: " + ex.getMessage());
+      }
+    } else if (e.getSource() == signIn.getItemExit()) {
+      System.exit(0);
+    } 
   }
 
   public void changeContent(JPanel next) {
