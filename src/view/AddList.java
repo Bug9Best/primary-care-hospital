@@ -1,8 +1,6 @@
 package view;
 
 import model.*;
-import model.List;
-
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.Connection;
@@ -14,8 +12,6 @@ import java.util.Date;
 import javax.swing.*;
 
 public class AddList implements ActionListener {
-    private List list;
-
     // Declare Attributes
     private JFrame frame;
     private JPanel panelForm;
@@ -88,13 +84,13 @@ public class AddList implements ActionListener {
             String pattern = "HH:mm:ss dd-MM-yyyy";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             String date = simpleDateFormat.format(new Date());
-            this.AddDrugDB(getTextFieldNameValue(), getTextFieldCoCValue(), date);
+            this.AddListDB(getTextFieldNameValue(), getTextFieldCoCValue(), date);
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
         }
     }
 
-    public void AddDrugDB(String name, String coc, String dateVisit) {
+    public void AddListDB(String name, String coc, String dateVisit) {
         String sql = "INSERT INTO lists (name, coc, dateVisit) VALUES (?, ?, ?)";
         try (Connection con = ConnnectDB.ConnectDB()) {
 
