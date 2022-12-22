@@ -1,10 +1,19 @@
 package view;
 
+import model.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class Supplies extends JPanel implements ActionListener, ListSelectionListener {
   // Declare Attributes
@@ -12,9 +21,7 @@ public class Supplies extends JPanel implements ActionListener, ListSelectionLis
   private JLabel labelTitle;
   private JButton btnAdd;
   private JTable supplyTable;
-
-  String data[][] = {};
-  String header[] = { "No.", "Supply Name", "Description", "In Stock" };
+  private List<Object[]> rows = new ArrayList<Object[]>();
 
   public Supplies() {
     // Create Objects
@@ -23,7 +30,10 @@ public class Supplies extends JPanel implements ActionListener, ListSelectionLis
     panelButton = new JPanel();
     labelTitle = new JLabel("Supplies List");
     btnAdd = new JButton("Add");
-    supplyTable = new JTable(data, header) {
+    getSupplies();
+    String[] columnNames = { "No.", "Supply Name", "Description", "In Stock" };
+    DefaultTableModel model = new DefaultTableModel(rows.toArray(new Object[rows.size()][]), columnNames);
+    supplyTable = new JTable(model) {
       public boolean isCellEditable(int row, int column) {
         return false;
       }
@@ -78,5 +88,25 @@ public class Supplies extends JPanel implements ActionListener, ListSelectionLis
 
   public JTable getSupplyTable() {
     return supplyTable;
+  }
+
+  public void getSupplies() {
+    String sql = "SELECT * FROM drugs";
+    try (Connection con = ConnnectDB.ConnectDB()) {
+      try (PreparedStatement statement = con.prepareStatement(sql)) {
+        ResultSet result = statement.executeQuery(sql);
+        while (result.next()) {
+          Object[] row = new Object[result.getMetaData().getColumnCount()];
+          for (int i = 1; i <= result.getMetaData().getColumnCount(); i++) {
+            row[i - 1] = result.getObject(i);
+          }
+          rows.add(row);
+        }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+      }
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
   }
 }

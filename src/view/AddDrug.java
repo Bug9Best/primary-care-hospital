@@ -92,7 +92,7 @@ public class AddDrug implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonAddList) {
-            drug = new Drug(getTextFieldNameValue(), getTextFieldDescriptionValue(), getTextFieldSideEffectsValue(), getTextFieldDrugDoseValue(), getTextFieldStorageValue());
+            drug = new Drug(getTextFieldNameValue(), getTextFieldDescriptionValue(), getTextFieldSideEffectsValue(),getTextFieldDrugDoseValue(), getTextFieldStorageValue());
             this.AddDrugDB(drug);
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
@@ -114,11 +114,11 @@ public class AddDrug implements ActionListener {
                 System.out.println("Add to DB Successfully");
                 getFrame().dispose();
             } catch (SQLException e) {
-                System.out.println("Add to DB Failed");
+                System.out.println(e.getMessage());
             }
 
         } catch (SQLException e) {
-            System.out.println("Connect Failed!!!");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -159,7 +159,7 @@ public class AddDrug implements ActionListener {
     }
 
     public int getTextFieldStorageValue() {
-        return Integer.parseInt(textFieldStorage.getText()) ;
+        return Integer.parseInt(textFieldStorage.getText());
     }
 
     public String getTextFieldDescriptionValue() {

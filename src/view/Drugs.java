@@ -1,10 +1,19 @@
 package view;
 
+import model.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 public class Drugs extends JPanel implements ActionListener, ListSelectionListener {
   // Declare Attributes
@@ -12,8 +21,7 @@ public class Drugs extends JPanel implements ActionListener, ListSelectionListen
   private JLabel labelTitle;
   private JButton btnAdd;
   private JTable drugTable;
-  private String data[][] = {};
-  private String header[] = { "No.", "Drug Name", "Description", "Side Effects", "In Stock" };
+  private List<Object[]> rows = new ArrayList<Object[]>();
 
   public Drugs() {
     // Create Objects
@@ -22,19 +30,16 @@ public class Drugs extends JPanel implements ActionListener, ListSelectionListen
     panelButton = new JPanel();
     labelTitle = new JLabel("Drugs List");
     btnAdd = new JButton("Add");
-    // ArrayList<Drug> drugs = DrugModel.getDrugsDB();
-    // data = new String[drugs.size()][];
-    // for (int i = 0; i < drugs.size(); i++) {
-    // data[i] = new String[] { String.valueOf(i + 1), drugs.get(i).getName(),
-    // drugs.get(i).getDescription(),
-    // drugs.get(i).getSideEffects(), String.valueOf(drugs.get(i).getStorage()) };
-    // }
+    getDrugs();
+    String[] columnNames = { "No.", "Drug Name", "Description", "Side Effect", "Dosage", "Stoage" };
+    DefaultTableModel model = new DefaultTableModel(rows.toArray(new Object[rows.size()][]), columnNames);
 
-    drugTable = new JTable(data, header) {
+    drugTable = new JTable(model) {
       public boolean isCellEditable(int row, int column) {
         return false;
       }
     };
+
     JScrollPane acrollPaneTable = new JScrollPane(drugTable);
 
     // Set Layout
@@ -57,7 +62,6 @@ public class Drugs extends JPanel implements ActionListener, ListSelectionListen
     // Add Action Listener
     btnAdd.addActionListener(this);
     drugTable.getSelectionModel().addListSelectionListener(this);
-
 
     // Add Components
     panelButton.add(btnAdd);
@@ -92,4 +96,23 @@ public class Drugs extends JPanel implements ActionListener, ListSelectionListen
     return drugTable;
   }
 
+  public void getDrugs() {
+    String sql = "SELECT * FROM drugs";
+    try (Connection con = ConnnectDB.ConnectDB()) {
+      try (PreparedStatement statement = con.prepareStatement(sql)) {
+        ResultSet result = statement.executeQuery(sql);
+        while (result.next()) {
+          Object[] row = new Object[result.getMetaData().getColumnCount()];
+          for (int i = 1; i <= result.getMetaData().getColumnCount(); i++) {
+            row[i - 1] = result.getObject(i);
+          }
+          rows.add(row);
+        }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+      }
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+  }
 }

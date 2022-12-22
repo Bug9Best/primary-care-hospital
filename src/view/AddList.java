@@ -1,19 +1,28 @@
 package view;
 
+import model.*;
+import model.List;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.*;
 
 public class AddList implements ActionListener {
+    private List list;
 
     // Declare Attributes
     private JFrame frame;
     private JPanel panelForm;
-    private JPanel panelDateVisit, panelName, panelCoC, panelDrug, panelDrugDose, panelSupply, panelSupplyAmount, panelButton;
-    private JLabel labelDateVisit, labelName, labelCoC, labelDrug, labelDose, labelSupply, labelSupplyAmount;
-    private JTextField textFieldDateVisit, textFieldName, textFieldDrugDose, textFieldSupply;
+    private JPanel panelDateVisit, panelName, panelCoC, panelButton;
+    private JLabel labelDateVisit, labelName, labelCoC;
+    private JTextField textFieldDateVisit, textFieldName;
     private JTextArea textFieldCoC;
-    private JComboBox<String> checkBoxDrug, checkBoxSuppl;
     private JButton buttonAddList, buttonCancel;
 
     public AddList() {
@@ -23,37 +32,21 @@ public class AddList implements ActionListener {
         panelDateVisit = new JPanel();
         panelName = new JPanel();
         panelCoC = new JPanel();
-        panelDrug = new JPanel();
-        panelDrugDose = new JPanel();
-        panelSupply = new JPanel();
-        panelSupplyAmount = new JPanel();
         panelButton = new JPanel();
         labelDateVisit = new JLabel("Date of Visit");
         labelName = new JLabel("Name");
         labelCoC = new JLabel("Cheif of Complain");
-        labelDrug = new JLabel("Drug");
-        labelDose = new JLabel("Drug Dose");
-        labelSupply = new JLabel("Supply");
-        labelSupplyAmount = new JLabel("Supply Amount");
-        textFieldDateVisit = new JTextField("Auto",20);
+        textFieldDateVisit = new JTextField("Auto", 20);
         textFieldName = new JTextField(20);
         textFieldCoC = new JTextArea(3, 20);
-        textFieldDrugDose = new JTextField(20);
-        textFieldSupply = new JTextField(20);
-        checkBoxDrug = new JComboBox();
-        checkBoxSuppl = new JComboBox();
         buttonAddList = new JButton("Add Patient");
         buttonCancel = new JButton("Cancel");
 
         // Set Layout
-        panelForm.setLayout(new GridLayout(8, 1));
+        panelForm.setLayout(new GridLayout(4, 1));
         panelDateVisit.setLayout(new GridLayout(2, 1));
         panelName.setLayout(new GridLayout(2, 1));
         panelCoC.setLayout(new GridLayout(2, 1));
-        panelDrug.setLayout(new GridLayout(2, 1));
-        panelDrugDose.setLayout(new GridLayout(2, 1));
-        panelSupply.setLayout(new GridLayout(2, 1));
-        panelSupplyAmount.setLayout(new GridLayout(2, 1));
         panelButton.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
 
         // Set Style
@@ -74,28 +67,16 @@ public class AddList implements ActionListener {
         panelName.add(textFieldName);
         panelCoC.add(labelCoC);
         panelCoC.add(textFieldCoC);
-        panelDrug.add(labelDrug);
-        panelDrug.add(checkBoxDrug);
-        panelDrugDose.add(labelDose);
-        panelDrugDose.add(textFieldDrugDose);
-        panelSupply.add(labelSupply);
-        panelSupply.add(checkBoxSuppl);
-        panelSupplyAmount.add(labelSupplyAmount);
-        panelSupplyAmount.add(textFieldSupply);
         panelButton.add(buttonCancel);
         panelButton.add(buttonAddList);
         panelForm.add(panelDateVisit);
         panelForm.add(panelName);
         panelForm.add(panelCoC);
-        panelForm.add(panelDrug);
-        panelForm.add(panelDrugDose);
-        panelForm.add(panelSupply);
-        panelForm.add(panelSupplyAmount);
         panelForm.add(panelButton);
         frame.add(panelForm);
 
         // Frame Configurations
-        frame.setSize(600, 500);
+        frame.setSize(600, 300);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -104,10 +85,37 @@ public class AddList implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonAddList) {
-            System.out.println("Add List");
+            String pattern = "HH:mm:ss dd-MM-yyyy";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            String date = simpleDateFormat.format(new Date());
+            this.AddDrugDB(getTextFieldNameValue(), getTextFieldCoCValue(), date);
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
         }
+    }
+
+    public void AddDrugDB(String name, String coc, String dateVisit) {
+        String sql = "INSERT INTO lists (name, coc, dateVisit) VALUES (?, ?, ?)";
+        try (Connection con = ConnnectDB.ConnectDB()) {
+
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
+                con.prepareStatement(sql);
+                statement.setString(1, name);
+                statement.setString(2, coc);
+                statement.setString(3, dateVisit);
+                statement.execute();
+                System.out.println("Add to DB Successfully");
+                getFrame().dispose();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 
     public JButton getButtonAddList() {
@@ -117,4 +125,33 @@ public class AddList implements ActionListener {
     public JButton getButtonCancel() {
         return buttonCancel;
     }
+
+    public JTextField getTextFieldName() {
+        return textFieldName;
+    }
+
+    public JTextArea getTextFieldCoC() {
+        return textFieldCoC;
+    }
+
+    public JTextField getTextFieldDateVisit() {
+        return textFieldDateVisit;
+    }
+
+    public String getTextFieldNameValue() {
+        return textFieldName.getText();
+    }
+
+    public String getTextFieldCoCValue() {
+        return textFieldCoC.getText();
+    }
+
+    public String getTextFieldDateVisitValue() {
+        return textFieldDateVisit.getText();
+    }
+
+    public void setTextFieldDateVisit(JTextField textFieldDateVisit) {
+        this.textFieldDateVisit = textFieldDateVisit;
+    }
+
 }

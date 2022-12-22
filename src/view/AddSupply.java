@@ -18,7 +18,6 @@ public class AddSupply implements ActionListener {
     private JTextArea textFieldDescription;
     private JButton buttonAddList, buttonCancel;
     private Supply supply;
-    private SupplyModel supplyModel;
 
     public AddSupply() {
         // Create Objects
@@ -78,7 +77,8 @@ public class AddSupply implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == buttonAddList) {
-            supply = new Supply(getTextFieldNameSupplyValue(), getTextFieldDescriptionValue(), getTextFieldStorageSupplyValue());
+            supply = new Supply(getTextFieldNameSupplyValue(), getTextFieldDescriptionValue(),
+                    getTextFieldStorageSupplyValue());
             AddSupplyDB(supply);
         } else if (e.getSource() == buttonCancel) {
             frame.dispose();
@@ -88,7 +88,7 @@ public class AddSupply implements ActionListener {
     public void AddSupplyDB(Supply supply) {
         String sql = "INSERT INTO supplies (name, description, storage) VALUES (?, ?, ?)";
         try (Connection con = ConnnectDB.ConnectDB()) {
-    
+
             try (PreparedStatement statement = con.prepareStatement(sql)) {
                 con.prepareStatement(sql);
                 statement.setString(1, supply.getName());
@@ -98,11 +98,11 @@ public class AddSupply implements ActionListener {
                 System.out.println("Add to DB Successfully");
                 getFrame().dispose();
             } catch (SQLException e) {
-                System.out.println("Add to DB Failed");
+                System.out.println(e.getMessage());
             }
-    
+
         } catch (SQLException e) {
-            System.out.println("Connect Failed!!!");
+            System.out.println(e.getMessage());
         }
     }
 
