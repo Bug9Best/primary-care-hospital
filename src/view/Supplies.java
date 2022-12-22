@@ -91,7 +91,7 @@ public class Supplies extends JPanel implements ActionListener, ListSelectionLis
   }
 
   public void getSupplies() {
-    String sql = "SELECT * FROM drugs";
+    String sql = "SELECT * FROM supplies";
     try (Connection con = ConnnectDB.ConnectDB()) {
       try (PreparedStatement statement = con.prepareStatement(sql)) {
         ResultSet result = statement.executeQuery(sql);

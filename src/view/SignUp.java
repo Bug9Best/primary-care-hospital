@@ -26,7 +26,7 @@ public class SignUp extends JFrame implements ActionListener {
         panelButton = new JPanel();
         img = new JLabel();
         labelName = new JLabel("Name");
-        labelRoll = new JLabel("Roll");
+        labelRoll = new JLabel("Role");
         labelUsername = new JLabel("Username");
         labelPassword = new JLabel("Password");
         textFieldName = new JTextField(40);
